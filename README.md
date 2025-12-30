@@ -16,39 +16,39 @@ This repository provides calculators and a facade to reproduce common fiscal cal
 - Auditable execution traces via `debug_execution` for troubleshooting and tests
 - Designed for deterministic unit testing and integration with decision tables (DMN)
 
-## Install
+## Architecture
 
-Recommended: create a virtual environment and install locally for development:
+A simplified diagram showing how data and decisions flow through the package.
 
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -e .
+```mermaid
+flowchart LR
+  In(("Tributavel (data model)")) --> Facade["FacadeCalculadoraTributacao"]
+  Facade --> Calculators["Tax Calculators (taxes/)"]
+  Calculators -->|uses rules| Rules["DMN rules (rules/)"]
+  Rules -->|decision logic| Calculators
+  Facade --> Audit["AuditManager / ExecutionReport"]
+  Audit --> Pretty["Human-readable report"]
+  Audit --> JSON["JSON report"]
+  Facade --> API["Public API (calcula_icms, calcula_tributacao)"]
+
+  subgraph Repo
+    R1["rules/ (DMN-backed)"]
+    R2["taxes/ (calculators)"]
+    R3["audit.py (reporting)"]
+    R4["scripts/ (helpers)"]
+  end
+
+  R1 --> Rules
+  R2 --> Calculators
+  R3 --> Audit
+  R4 --> Facade
 ```
 
-Or install directly from the repository:
-
-```bash
-pip install git+https://github.com/techmaxsolucoes/motor_tributario_py.git#egg=motor_tributario_py
-```
-
-Requires a modern Python 3 interpreter (3.8+ recommended).
-
-## Quickstart
-
-1. Build a `Tributavel` (data holder for invoice/product values and rates).
-2. Create the facade and run the desired calculation(s).
-
-Example:
-
-```python
-from decimal import Decimal
-from motor_tributario_py.models import Tributavel
-from motor_tributario_py.facade import FacadeCalculadoraTributacao
-
-produto = Tributavel(
-    valor_produto=Decimal('100.00'),
-    quantidade_produto=Decimal('1'),
+- `Tributavel` is the single data holder for item/document values and percentages.
+- `FacadeCalculadoraTributacao` orchestrates the calculators and consults DMN-backed rule tables when necessary.
+- `rules/` contains DMN-style rule definitions consulted via `bkflow-dmn`.
+- `taxes/` implements numeric calculations; `audit.py` captures evaluation traces and produces both human-readable and JSON reports.
+- `scripts/` contains utilities used to generate embedded documentation and debug examples.
     percentual_icms=Decimal('18.0'),
     percentual_pis=Decimal('1.65'),
     percentual_cofins=Decimal('7.6'),
