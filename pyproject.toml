@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "motor_tributario_py"
+version = "0.1.0"
+description = "Tax calculation utilities for Brazilian fiscal rules (ICMS, IPI, PIS/COFINS, FCP, DIFAL, ICMS ST, etc.)"
+readme = "README.md"
+authors = [ { name = "TechMax" } ]
+license = { text = "See LICENSE" }
+requires-python = ">=3.8"
+
+dependencies = [
+    "bkflow-dmn @ git+https://github.com/techmaxsolucoes/bkflow-dmn.git",
+    "bkflow-feel @ git+https://github.com/techmaxsolucoes/bkflow-feel.git",
+]
+
+[tool.setuptools]
+packages = { find = {} }
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["motor_tributario_py*"]
+
+[project.urls]
+"Source" = "https://github.com/techmaxsolucoes/motor_tributario_py"

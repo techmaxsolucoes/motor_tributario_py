@@ -1,0 +1,5101 @@
+[
+    {
+        "group": "CalculoCbs",
+        "testcase": "CalculoCbsBasico",
+        "inputs": {
+            "PercentualCbs": 8.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCbs",
+                "method": "calcula_cbs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "BaseCalculo",
+                "expected": 727.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "Valor",
+                "expected": 58.2
+            }
+        ]
+    },
+    {
+        "group": "CalculoCbs",
+        "testcase": "CalculoCbsComDescontoIncondicional",
+        "inputs": {
+            "PercentualCbs": 8.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "Desconto": 100.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Incondicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCbs",
+                "method": "calcula_cbs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "BaseCalculo",
+                "expected": 654.75
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "Valor",
+                "expected": 52.38
+            }
+        ]
+    },
+    {
+        "group": "CalculoCbs",
+        "testcase": "CalculoCbsComFreteSeguroOutrasDespesas",
+        "inputs": {
+            "PercentualCbs": 8.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "Frete": 50.0,
+            "Seguro": 20.0,
+            "OutrasDespesas": 30.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCbs",
+                "method": "calcula_cbs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "BaseCalculo",
+                "expected": 800.25
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "Valor",
+                "expected": 64.02
+            }
+        ]
+    },
+    {
+        "group": "CalculoCbs",
+        "testcase": "CalculoCbsComFreteSeguroOutrasDespesasEDesconto",
+        "inputs": {
+            "PercentualCbs": 8.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "Frete": 50.0,
+            "Seguro": 20.0,
+            "OutrasDespesas": 30.0,
+            "Desconto": 100.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Incondicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCbs",
+                "method": "calcula_cbs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "BaseCalculo",
+                "expected": 727.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "Valor",
+                "expected": 58.2
+            }
+        ]
+    },
+    {
+        "group": "CalculoCbs",
+        "testcase": "CalculoCbsComAliquotaDiferente",
+        "inputs": {
+            "PercentualCbs": 12.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCbs",
+                "method": "calcula_cbs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "BaseCalculo",
+                "expected": 727.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "Valor",
+                "expected": 87.3
+            }
+        ]
+    },
+    {
+        "group": "CalculoCbs",
+        "testcase": "CalculoCbsComQuantidadeMaiorQueUm",
+        "inputs": {
+            "PercentualCbs": 8.0,
+            "ValorProduto": 100.0,
+            "QuantidadeProduto": 10.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCbs",
+                "method": "calcula_cbs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "BaseCalculo",
+                "expected": 727.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "Valor",
+                "expected": 58.2
+            }
+        ]
+    },
+    {
+        "group": "CalculoCbs",
+        "testcase": "CalculoCbsSemPisCofinsIcms",
+        "inputs": {
+            "PercentualCbs": 8.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 0.0,
+            "PercentualCofins": 0.0,
+            "PercentualIcms": 0.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCbs",
+                "method": "calcula_cbs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "Valor",
+                "expected": 80.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoCbs",
+        "testcase": "CalculoCbsComValorDecimal",
+        "inputs": {
+            "PercentualCbs": 8.5,
+            "ValorProduto": 157.89,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCbs",
+                "method": "calcula_cbs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "BaseCalculo",
+                "expected": 114.86
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "Valor",
+                "expected": 9.76
+            }
+        ]
+    },
+    {
+        "group": "CalculoCbs",
+        "testcase": "CalculoCbsEIbsJuntos",
+        "inputs": {
+            "PercentualCbs": 8.0,
+            "PercentualIbsUF": 10.0,
+            "PercentualIbsMunicipal": 5.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCbs",
+                "method": "calcula_cbs",
+                "args": []
+            },
+            {
+                "var_name": "resultadoCalculoIbsUF",
+                "method": "calcula_ibs",
+                "args": []
+            },
+            {
+                "var_name": "resultadoCalculoIbsMunicipal",
+                "method": "calcula_ibs_municipal",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "BaseCalculo",
+                "expected": "resultadoCalculoIbsUF.BaseCalculo"
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "BaseCalculo",
+                "expected": "resultadoCalculoIbsMunicipal.BaseCalculo"
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "BaseCalculo",
+                "expected": 727.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "Valor",
+                "expected": 58.2
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsUF",
+                "prop": "Valor",
+                "expected": 72.75
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "Valor",
+                "expected": 36.38
+            }
+        ]
+    },
+    {
+        "group": "CalculoCbs",
+        "testcase": "CalculoCbsComReducaoAliquota",
+        "inputs": {
+            "PercentualCbs": 0.9,
+            "PercentualReducaoCbs": 50.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 0.0,
+            "PercentualCofins": 0.0,
+            "PercentualIcms": 0.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCbs",
+                "method": "calcula_cbs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "Valor",
+                "expected": 4.5
+            }
+        ]
+    },
+    {
+        "group": "CalculoCbs",
+        "testcase": "CalculoCbsComReducaoAliquota100Porcento",
+        "inputs": {
+            "PercentualCbs": 0.9,
+            "PercentualReducaoCbs": 100.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 0.0,
+            "PercentualCofins": 0.0,
+            "PercentualIcms": 0.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCbs",
+                "method": "calcula_cbs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "Valor",
+                "expected": 0.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoCbs",
+        "testcase": "CalculoCbsSemReducaoAliquota",
+        "inputs": {
+            "PercentualCbs": 0.9,
+            "PercentualReducaoCbs": 0.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 0.0,
+            "PercentualCofins": 0.0,
+            "PercentualIcms": 0.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCbs",
+                "method": "calcula_cbs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCbs",
+                "prop": "Valor",
+                "expected": 9.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoCofins",
+        "testcase": "CalculaCofins",
+        "inputs": {
+            "PercentualCofins": 0.65,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCofins",
+                "method": "calcula_cofins",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCofins",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCofins",
+                "prop": "Valor",
+                "expected": 6.5
+            }
+        ]
+    },
+    {
+        "group": "CalculoCofins",
+        "testcase": "CalculaCofinsComDescontoIncondicional",
+        "inputs": {
+            "PercentualCofins": 0.65,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "Desconto": 100.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Incondicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCofins",
+                "method": "calcula_cofins",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCofins",
+                "prop": "BaseCalculo",
+                "expected": 900.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCofins",
+                "prop": "Valor",
+                "expected": 5.85
+            }
+        ]
+    },
+    {
+        "group": "CalculoCofins",
+        "testcase": "CalculaCofinsComIpiZero",
+        "inputs": {
+            "PercentualCofins": 0.65,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "ValorIpi": 0.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCofins",
+                "method": "calcula_cofins",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCofins",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCofins",
+                "prop": "Valor",
+                "expected": 6.5
+            }
+        ]
+    },
+    {
+        "group": "CalculoCofins",
+        "testcase": "CalculaCofinsComIpiZeroComDescontoIncondicional",
+        "inputs": {
+            "PercentualCofins": 0.65,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "ValorIpi": 0.0,
+            "Desconto": 100.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Incondicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCofins",
+                "method": "calcula_cofins",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCofins",
+                "prop": "BaseCalculo",
+                "expected": 900.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCofins",
+                "prop": "Valor",
+                "expected": 5.85
+            }
+        ]
+    },
+    {
+        "group": "CalculoFcp",
+        "testcase": "TestaCalculoFcp",
+        "inputs": {
+            "PercentualFcp": 10.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCofins",
+                "method": "calcula_fcp",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCofins",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCofins",
+                "prop": "Valor",
+                "expected": 100.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoFcp",
+        "testcase": "TestaCalculoFcpComDescontoIncondicional",
+        "inputs": {
+            "PercentualFcp": 10.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "Desconto": 100.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Incondicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCofins",
+                "method": "calcula_fcp",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCofins",
+                "prop": "BaseCalculo",
+                "expected": 900.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCofins",
+                "prop": "Valor",
+                "expected": 90.0
+            }
+        ]
+    },
+    {
+        "group": "ResultadoTributacao",
+        "testcase": "Testa_ICSM_Desonerado_Base_Simples_Cst_20",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 3.5,
+            "PercentualIcms": 12.0,
+            "PercentualReducao": 41.67,
+            "Cst": "20"
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterna",
+            "tipo_pessoa": "Juridica",
+            "tipo_calculo_icms_desonerado": "BaseSimples"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": []
+    },
+    {
+        "group": "ResultadoTributacao",
+        "testcase": "Testa_ICSM_Desonerado_Base_Por_Dentro_Cst_20",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 3.5,
+            "PercentualIcms": 12.0,
+            "PercentualReducao": 41.67,
+            "Cst": "20"
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterna",
+            "tipo_pessoa": "Juridica",
+            "tipo_calculo_icms_desonerado": "BasePorDentro"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": []
+    },
+    {
+        "group": "ResultadoTributacao",
+        "testcase": "Testa_ICSM_Desonerado_Base_Simples_Cst_30",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 200.0,
+            "PercentualIcms": 20.0,
+            "Cst": "30"
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterna",
+            "tipo_pessoa": "Juridica",
+            "tipo_calculo_icms_desonerado": "BaseSimples"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": []
+    },
+    {
+        "group": "ResultadoTributacao",
+        "testcase": "Testa_ICSM_Desonerado_Base_Por_Dentro_Cst_30",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 200.0,
+            "PercentualIcms": 20.0,
+            "Cst": "30"
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterna",
+            "tipo_pessoa": "Juridica",
+            "tipo_calculo_icms_desonerado": "BasePorDentro"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": []
+    },
+    {
+        "group": "ResultadoTributacao",
+        "testcase": "Testa_ICSM_Desonerado_Base_Simples_Cst_40",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 200.0,
+            "PercentualIcms": 20.0,
+            "Cst": "40"
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterna",
+            "tipo_pessoa": "Juridica",
+            "tipo_calculo_icms_desonerado": "BaseSimples"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": []
+    },
+    {
+        "group": "ResultadoTributacao",
+        "testcase": "Testa_ICSM_Desonerado_Base_Por_Dentro_Cst_40",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 200.0,
+            "PercentualIcms": 20.0,
+            "Cst": "40"
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterna",
+            "tipo_pessoa": "Juridica",
+            "tipo_calculo_icms_desonerado": "BasePorDentro"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": []
+    },
+    {
+        "group": "ResultadoTributacao",
+        "testcase": "Testa_ICSM_Desonerado_Base_Simples_Cst_70",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 3.5,
+            "PercentualIcms": 12.0,
+            "PercentualReducao": 41.67,
+            "Cst": "70"
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterna",
+            "tipo_pessoa": "Juridica",
+            "tipo_calculo_icms_desonerado": "BaseSimples"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": []
+    },
+    {
+        "group": "ResultadoTributacao",
+        "testcase": "Testa_ICSM_Desonerado_Base_Por_Dentro_Cst_70",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 3.5,
+            "PercentualIcms": 12.0,
+            "PercentualReducao": 41.67,
+            "Cst": "70"
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterna",
+            "tipo_pessoa": "Juridica",
+            "tipo_calculo_icms_desonerado": "BasePorDentro"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": []
+    },
+    {
+        "group": "ResultadoTributacao",
+        "testcase": "Testa_Cst_02_Icms_Monofasico_Proprio",
+        "inputs": {
+            "QuantidadeBaseCalculoIcmsMonofasico": 16.1,
+            "AliquotaAdRemIcms": 1.2571,
+            "Cst": "02"
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterna",
+            "tipo_pessoa": "Juridica"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": []
+    },
+    {
+        "group": "ResultadoTributacao",
+        "testcase": "Testa_Cst_15_Valor_Icms_Monofasico_Retencao",
+        "inputs": {
+            "QuantidadeBaseCalculoIcmsMonofasico": 14.04,
+            "PercentualReducaoAliquotaAdRemIcms": 13.41,
+            "PercentualBiodisel": 20.0,
+            "AliquotaAdRemIcms": 0.9456,
+            "PercentualOriginarioUf": 26.042,
+            "Cst": "15"
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterna",
+            "tipo_pessoa": "Juridica"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": []
+    },
+    {
+        "group": "ResultadoTributacao",
+        "testcase": "Testa_Cst_15_Valor_Icms_Monofasico_Proprio",
+        "inputs": {
+            "QuantidadeBaseCalculoIcmsMonofasico": 14.04,
+            "PercentualReducaoAliquotaAdRemIcms": 13.41,
+            "PercentualBiodisel": 20.0,
+            "AliquotaAdRemIcms": 0.9456,
+            "PercentualOriginarioUf": 26.042,
+            "Cst": "15"
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterna",
+            "tipo_pessoa": "Juridica"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": []
+    },
+    {
+        "group": "ResultadoTributacao",
+        "testcase": "Testa_Cst_53_Valor_Icms_Monofasico_Proprio",
+        "inputs": {
+            "QuantidadeBaseCalculoIcmsMonofasico": 20.23,
+            "AliquotaAdRemIcms": 0.9456,
+            "PercentualOriginarioUf": 38.0,
+            "Cst": "53"
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterna",
+            "tipo_pessoa": "Juridica"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": []
+    },
+    {
+        "group": "ResultadoTributacao",
+        "testcase": "Testa_Cst_53_Valor_Icms_Operacao",
+        "inputs": {
+            "QuantidadeBaseCalculoIcmsMonofasico": 20.23,
+            "AliquotaAdRemIcms": 0.9456,
+            "PercentualOriginarioUf": 38.0,
+            "Cst": "53"
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterna",
+            "tipo_pessoa": "Juridica"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": []
+    },
+    {
+        "group": "ResultadoTributacao",
+        "testcase": "Testa_Cst_53_Icms_Monofasico_Diferido",
+        "inputs": {
+            "QuantidadeBaseCalculoIcmsMonofasico": 20.23,
+            "AliquotaAdRemIcms": 0.9456,
+            "PercentualOriginarioUf": 38.0,
+            "Cst": "53"
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterna",
+            "tipo_pessoa": "Juridica"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": []
+    },
+    {
+        "group": "ResultadoTributacao",
+        "testcase": "Testa_Cst_61_Icms_Monofasico_Retido_Anteriormente",
+        "inputs": {
+            "QuantidadeBaseCalculoIcmsMonofasicoRetidoAnteriormente": 13.37,
+            "AliquotaAdRemIcmsRetidoAnteriormente": 0.9456,
+            "Cst": "61"
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterna",
+            "tipo_pessoa": "Juridica"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": []
+    },
+    {
+        "group": "CalculoIcmsSt",
+        "testcase": "TestaIcmsSt",
+        "inputs": {
+            "PercentualIcms": 18.0,
+            "PercentualIcmsSt": 18.0,
+            "PercentualIpi": 15.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualMva": 40.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIcmsSt",
+                "method": "calcula_icms_st",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcmsSt",
+                "prop": "BaseCalculoOperacaoPropria",
+                "expected": 2000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcmsSt",
+                "prop": "ValorIcmsProprio",
+                "expected": 360.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcmsSt",
+                "prop": "BaseCalculoIcmsSt",
+                "expected": 3220.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcmsSt",
+                "prop": "ValorIcmsSt",
+                "expected": 219.6
+            }
+        ]
+    },
+    {
+        "group": "CalculoIcmsSt",
+        "testcase": "TestaIcmsStValorSt",
+        "inputs": {
+            "ValorProduto": 10000.0,
+            "Frete": 80.0,
+            "Seguro": 20.0,
+            "PercentualIcms": 7.0,
+            "PercentualIcmsSt": 18.0,
+            "PercentualMva": 40.0,
+            "QuantidadeProduto": 1.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIcmsSt",
+                "method": "calcula_icms_st",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcmsSt",
+                "prop": "ValorIcmsSt",
+                "expected": 1838.2
+            }
+        ]
+    },
+    {
+        "group": "CalculoIpi",
+        "testcase": "CalcularIpiComQuantidadeUm",
+        "inputs": {
+            "PercentualIpi": 17.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIpi",
+                "method": "calcula_ipi",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIpi",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIpi",
+                "prop": "Valor",
+                "expected": 170.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIpi",
+        "testcase": "CalcularIpiComQuantidadeDois",
+        "inputs": {
+            "PercentualIpi": 17.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 2.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIpi",
+                "method": "calcula_ipi",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIpi",
+                "prop": "BaseCalculo",
+                "expected": 4000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIpi",
+                "prop": "Valor",
+                "expected": 680.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIpi",
+        "testcase": "CalcularIpiComDescontoCondicional",
+        "inputs": {
+            "PercentualIpi": 12.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 2.0,
+            "Desconto": 1000.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Condicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIpi",
+                "method": "calcula_ipi",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIpi",
+                "prop": "BaseCalculo",
+                "expected": 5000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIpi",
+                "prop": "Valor",
+                "expected": 600.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIpi",
+        "testcase": "CalcularIpiComDescontoIncondicional",
+        "inputs": {
+            "PercentualIpi": 12.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 2.0,
+            "Desconto": 1000.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Incondicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIpi",
+                "method": "calcula_ipi",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIpi",
+                "prop": "BaseCalculo",
+                "expected": 3000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIpi",
+                "prop": "Valor",
+                "expected": 360.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIpi",
+        "testcase": "CalcularIpiComFreteComDescontoCondicional",
+        "inputs": {
+            "PercentualIpi": 15.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 2.0,
+            "Desconto": 1000.0,
+            "Frete": 373.5
+        },
+        "facade_args": {
+            "tipo_desconto": "Condicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIpi",
+                "method": "calcula_ipi",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIpi",
+                "prop": "BaseCalculo",
+                "expected": 5373.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIpi",
+                "prop": "Valor",
+                "expected": 806.02
+            }
+        ]
+    },
+    {
+        "group": "CalculoIpi",
+        "testcase": "CalcularIpiComFreteComDescontoIncondicional",
+        "inputs": {
+            "PercentualIpi": 15.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 2.0,
+            "Desconto": 1000.0,
+            "Frete": 373.5
+        },
+        "facade_args": {
+            "tipo_desconto": "Incondicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIpi",
+                "method": "calcula_ipi",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIpi",
+                "prop": "BaseCalculo",
+                "expected": 3373.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIpi",
+                "prop": "Valor",
+                "expected": 506.02
+            }
+        ]
+    },
+    {
+        "group": "CalculoIpi",
+        "testcase": "CalcularIpiComOutrasDespesasESeguroComDescontoCondicional",
+        "inputs": {
+            "PercentualIpi": 12.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 2.0,
+            "Desconto": 1000.0,
+            "Frete": 373.5,
+            "OutrasDespesas": 233.1,
+            "Seguro": 5.73
+        },
+        "facade_args": {
+            "tipo_desconto": "Condicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIpi",
+                "method": "calcula_ipi",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIpi",
+                "prop": "BaseCalculo",
+                "expected": 5612.33
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIpi",
+                "prop": "Valor",
+                "expected": 673.48
+            }
+        ]
+    },
+    {
+        "group": "CalculoIpi",
+        "testcase": "CalcularIpiComOutrasDespesasESeguroComDescontoIncondicional",
+        "inputs": {
+            "PercentualIpi": 12.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 2.0,
+            "Desconto": 1000.0,
+            "Frete": 373.5,
+            "OutrasDespesas": 233.1,
+            "Seguro": 5.73
+        },
+        "facade_args": {
+            "tipo_desconto": "Incondicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIpi",
+                "method": "calcula_ipi",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIpi",
+                "prop": "BaseCalculo",
+                "expected": 3612.33
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIpi",
+                "prop": "Valor",
+                "expected": 433.48
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbs",
+        "testcase": "CalculoIbsBasico",
+        "inputs": {
+            "PercentualIbsUF": 10.0,
+            "PercentualIbsMunicipal": 5.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbs",
+                "method": "calcula_ibs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "BaseCalculo",
+                "expected": 727.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "Valor",
+                "expected": 72.75
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbs",
+        "testcase": "CalculoIbsComDescontoIncondicional",
+        "inputs": {
+            "PercentualIbsUF": 10.0,
+            "PercentualIbsMunicipal": 5.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "Desconto": 100.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Incondicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbs",
+                "method": "calcula_ibs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "BaseCalculo",
+                "expected": 654.75
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "Valor",
+                "expected": 65.48
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbs",
+        "testcase": "CalculoIbsComFreteSeguroOutrasDespesas",
+        "inputs": {
+            "PercentualIbsUF": 8.0,
+            "PercentualIbsMunicipal": 4.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "Frete": 50.0,
+            "Seguro": 20.0,
+            "OutrasDespesas": 30.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbs",
+                "method": "calcula_ibs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "BaseCalculo",
+                "expected": 800.25
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "Valor",
+                "expected": 64.02
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbs",
+        "testcase": "CalculoIbsComFreteSeguroOutrasDespesasEDesconto",
+        "inputs": {
+            "PercentualIbsUF": 8.0,
+            "PercentualIbsMunicipal": 4.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "Frete": 50.0,
+            "Seguro": 20.0,
+            "OutrasDespesas": 30.0,
+            "Desconto": 100.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Incondicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbs",
+                "method": "calcula_ibs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "BaseCalculo",
+                "expected": 727.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "Valor",
+                "expected": 58.2
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbs",
+        "testcase": "CalculoIbsApenasComponenteEstadual",
+        "inputs": {
+            "PercentualIbsUF": 10.0,
+            "PercentualIbsMunicipal": 0.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbs",
+                "method": "calcula_ibs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "BaseCalculo",
+                "expected": 727.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "Valor",
+                "expected": 72.75
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbs",
+        "testcase": "CalculoIbsSemComponenteEstadual",
+        "inputs": {
+            "PercentualIbsUF": 0.0,
+            "PercentualIbsMunicipal": 5.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbs",
+                "method": "calcula_ibs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "BaseCalculo",
+                "expected": 727.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "Valor",
+                "expected": 0.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbs",
+        "testcase": "CalculoIbsComQuantidadeMaiorQueUm",
+        "inputs": {
+            "PercentualIbsUF": 10.0,
+            "PercentualIbsMunicipal": 5.0,
+            "ValorProduto": 100.0,
+            "QuantidadeProduto": 10.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbs",
+                "method": "calcula_ibs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "BaseCalculo",
+                "expected": 727.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "Valor",
+                "expected": 72.75
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbs",
+        "testcase": "CalculoIbsSemPisCofinsIcms",
+        "inputs": {
+            "PercentualIbsUF": 10.0,
+            "PercentualIbsMunicipal": 5.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 0.0,
+            "PercentualCofins": 0.0,
+            "PercentualIcms": 0.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbs",
+                "method": "calcula_ibs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "Valor",
+                "expected": 100.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbs",
+        "testcase": "CalculoIbsComValorDecimal",
+        "inputs": {
+            "PercentualIbsUF": 8.5,
+            "PercentualIbsMunicipal": 3.75,
+            "ValorProduto": 157.89,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbs",
+                "method": "calcula_ibs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "BaseCalculo",
+                "expected": 114.86
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "Valor",
+                "expected": 9.76
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbs",
+        "testcase": "CalculoIbsComReducaoAliquota",
+        "inputs": {
+            "PercentualIbsUF": 0.9,
+            "PercentualReducaoIbsUf": 50.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 0.0,
+            "PercentualCofins": 0.0,
+            "PercentualIcms": 0.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbs",
+                "method": "calcula_ibs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "Valor",
+                "expected": 4.5
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbs",
+        "testcase": "CalculoIbsComReducaoAliquota100Porcento",
+        "inputs": {
+            "PercentualIbsUF": 0.9,
+            "PercentualReducaoIbsUf": 100.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 0.0,
+            "PercentualCofins": 0.0,
+            "PercentualIcms": 0.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbs",
+                "method": "calcula_ibs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "Valor",
+                "expected": 0.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbs",
+        "testcase": "CalculoIbsSemReducaoAliquota",
+        "inputs": {
+            "PercentualIbsUF": 0.9,
+            "PercentualReducaoIbsUf": 0.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 0.0,
+            "PercentualCofins": 0.0,
+            "PercentualIcms": 0.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbs",
+                "method": "calcula_ibs",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbs",
+                "prop": "Valor",
+                "expected": 9.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoFcpSt",
+        "testcase": "TestaFcpSt_Valor_56",
+        "inputs": {
+            "PercentualFcpSt": 2.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualMva": 40.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIcmsSt",
+                "method": "calcula_fcp_st",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcmsSt",
+                "prop": "ValorFcpSt",
+                "expected": 56.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoFcpSt",
+        "testcase": "TestFcpSt_Valor_2_60",
+        "inputs": {
+            "PercentualFcpSt": 2.0,
+            "ValorProduto": 100.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualMva": 30.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIcmsSt",
+                "method": "calcula_fcp_st",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcmsSt",
+                "prop": "ValorFcpSt",
+                "expected": 2.6
+            }
+        ]
+    },
+    {
+        "group": "CalculoFcpSt",
+        "testcase": "TestaFcpSt_ComDescontoIncondicional",
+        "inputs": {
+            "PercentualFcpSt": 2.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualMva": 40.0,
+            "Desconto": 200.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Incondicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIcmsSt",
+                "method": "calcula_fcp_st",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcmsSt",
+                "prop": "BaseCalculoFcpSt",
+                "expected": 2520.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcmsSt",
+                "prop": "ValorFcpSt",
+                "expected": 50.4
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbsMunicipal",
+        "testcase": "CalculoIbsMunicipalBasico",
+        "inputs": {
+            "PercentualIbsUF": 10.0,
+            "PercentualIbsMunicipal": 5.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbsMunicipal",
+                "method": "calcula_ibs_municipal",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "BaseCalculo",
+                "expected": 727.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "Valor",
+                "expected": 36.38
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbsMunicipal",
+        "testcase": "CalculoIbsMunicipalComDescontoIncondicional",
+        "inputs": {
+            "PercentualIbsUF": 10.0,
+            "PercentualIbsMunicipal": 5.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "Desconto": 100.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Incondicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbsMunicipal",
+                "method": "calcula_ibs_municipal",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "BaseCalculo",
+                "expected": 654.75
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "Valor",
+                "expected": 32.74
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbsMunicipal",
+        "testcase": "CalculoIbsMunicipalComFreteSeguroOutrasDespesas",
+        "inputs": {
+            "PercentualIbsUF": 8.0,
+            "PercentualIbsMunicipal": 4.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "Frete": 50.0,
+            "Seguro": 20.0,
+            "OutrasDespesas": 30.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbsMunicipal",
+                "method": "calcula_ibs_municipal",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "BaseCalculo",
+                "expected": 800.25
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "Valor",
+                "expected": 32.01
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbsMunicipal",
+        "testcase": "CalculoIbsMunicipalComFreteSeguroOutrasDespesasEDesconto",
+        "inputs": {
+            "PercentualIbsUF": 8.0,
+            "PercentualIbsMunicipal": 4.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "Frete": 50.0,
+            "Seguro": 20.0,
+            "OutrasDespesas": 30.0,
+            "Desconto": 100.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Incondicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbsMunicipal",
+                "method": "calcula_ibs_municipal",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "BaseCalculo",
+                "expected": 727.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "Valor",
+                "expected": 29.1
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbsMunicipal",
+        "testcase": "CalculoIbsMunicipalApenasComponenteMunicipal",
+        "inputs": {
+            "PercentualIbsUF": 0.0,
+            "PercentualIbsMunicipal": 5.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbsMunicipal",
+                "method": "calcula_ibs_municipal",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "BaseCalculo",
+                "expected": 727.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "Valor",
+                "expected": 36.38
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbsMunicipal",
+        "testcase": "CalculoIbsMunicipalSemComponenteMunicipal",
+        "inputs": {
+            "PercentualIbsUF": 10.0,
+            "PercentualIbsMunicipal": 0.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbsMunicipal",
+                "method": "calcula_ibs_municipal",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "BaseCalculo",
+                "expected": 727.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "Valor",
+                "expected": 0.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbsMunicipal",
+        "testcase": "CalculoIbsMunicipalComQuantidadeMaiorQueUm",
+        "inputs": {
+            "PercentualIbsUF": 10.0,
+            "PercentualIbsMunicipal": 5.0,
+            "ValorProduto": 100.0,
+            "QuantidadeProduto": 10.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbsMunicipal",
+                "method": "calcula_ibs_municipal",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "BaseCalculo",
+                "expected": 727.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "Valor",
+                "expected": 36.38
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbsMunicipal",
+        "testcase": "CalculoIbsMunicipalSemPisCofinsIcms",
+        "inputs": {
+            "PercentualIbsUF": 10.0,
+            "PercentualIbsMunicipal": 5.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 0.0,
+            "PercentualCofins": 0.0,
+            "PercentualIcms": 0.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbsMunicipal",
+                "method": "calcula_ibs_municipal",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "Valor",
+                "expected": 50.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbsMunicipal",
+        "testcase": "CalculoIbsMunicipalComValorDecimal",
+        "inputs": {
+            "PercentualIbsUF": 8.5,
+            "PercentualIbsMunicipal": 3.75,
+            "ValorProduto": 157.89,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbsMunicipal",
+                "method": "calcula_ibs_municipal",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "BaseCalculo",
+                "expected": 114.86
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "Valor",
+                "expected": 4.31
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbsMunicipal",
+        "testcase": "CalculoIbsMunicipalETotalComAmbosComponentes",
+        "inputs": {
+            "PercentualIbsUF": 10.0,
+            "PercentualIbsMunicipal": 5.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 1.65,
+            "PercentualCofins": 7.6,
+            "PercentualIcms": 18.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoIbsUF",
+                "method": "calcula_ibs",
+                "args": []
+            },
+            {
+                "var_name": "resultadoIbsMunicipal",
+                "method": "calcula_ibs_municipal",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoIbsMunicipal",
+                "prop": "BaseCalculo",
+                "expected": "resultadoIbsUF.BaseCalculo"
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoIbsUF",
+                "prop": "BaseCalculo",
+                "expected": 727.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoIbsUF",
+                "prop": "Valor",
+                "expected": 72.75
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoIbsMunicipal",
+                "prop": "Valor",
+                "expected": 36.38
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbsMunicipal",
+        "testcase": "CalculoIbsMunicipalComReducaoAliquota",
+        "inputs": {
+            "PercentualIbsMunicipal": 0.9,
+            "PercentualReducaoIbsMunicipal": 50.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 0.0,
+            "PercentualCofins": 0.0,
+            "PercentualIcms": 0.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbsMunicipal",
+                "method": "calcula_ibs_municipal",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "Valor",
+                "expected": 4.5
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbsMunicipal",
+        "testcase": "CalculoIbsMunicipalComReducaoAliquota100Porcento",
+        "inputs": {
+            "PercentualIbsMunicipal": 0.9,
+            "PercentualReducaoIbsMunicipal": 100.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 0.0,
+            "PercentualCofins": 0.0,
+            "PercentualIcms": 0.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbsMunicipal",
+                "method": "calcula_ibs_municipal",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "Valor",
+                "expected": 0.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbsMunicipal",
+        "testcase": "CalculoIbsMunicipalSemReducaoAliquota",
+        "inputs": {
+            "PercentualIbsMunicipal": 0.9,
+            "PercentualReducaoIbsMunicipal": 0.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualPis": 0.0,
+            "PercentualCofins": 0.0,
+            "PercentualIcms": 0.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIbsMunicipal",
+                "method": "calcula_ibs_municipal",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIbsMunicipal",
+                "prop": "Valor",
+                "expected": 9.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoItemNFe",
+        "testcase": "CalcularItemComUIcmsIpiPisCofins",
+        "inputs": {
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "IsServico": false,
+            "CstPisCofins": "01",
+            "PercentualIcms": 17.0,
+            "PercentualIpi": 5.0,
+            "PercentualCofins": 3.0,
+            "PercentualPis": 1.65
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterna",
+            "tipo_pessoa": "Fisica"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorBcIcms",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorIcms",
+                "expected": 170.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorIpi",
+                "expected": 50.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorCofins",
+                "expected": 30.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorPis",
+                "expected": 16.5
+            }
+        ]
+    },
+    {
+        "group": "CalculoItemNFe",
+        "testcase": "CalcularItemComUIcmsIpiPisCofinsDifal",
+        "inputs": {
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "IsServico": false,
+            "Cst": "00",
+            "PercentualIcms": 17.0,
+            "PercentualIpi": 5.0,
+            "CstPisCofins": "01",
+            "PercentualCofins": 3.0,
+            "PercentualPis": 1.65,
+            "PercentualFcp": 2.0,
+            "PercentualDifalInterna": 18.0,
+            "PercentualDifalInterestadual": 12.0
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterestadual",
+            "tipo_pessoa": "Fisica"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorBcIcms",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorIcms",
+                "expected": 170.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorIpi",
+                "expected": 50.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorCofins",
+                "expected": 30.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorPis",
+                "expected": 16.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "Fcp",
+                "expected": 20.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorDifal",
+                "expected": 60.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorIcmsOrigem",
+                "expected": 0.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorIcmsDestino",
+                "expected": 60.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoItemNFe",
+        "testcase": "CalcularItemComUIcmsIpiPisCofinsIbpt",
+        "inputs": {
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "IsServico": false,
+            "CstPisCofins": "01",
+            "PercentualIcms": 17.0,
+            "PercentualIpi": 5.0,
+            "PercentualCofins": 3.0,
+            "PercentualPis": 1.65,
+            "PercentualFederal": 10.0,
+            "PercentualFederalImportados": 20.0,
+            "PercentualEstadual": 15.0,
+            "PercentualMunicipal": 0.0
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterna",
+            "tipo_pessoa": "Fisica"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorBcIcms",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorIcms",
+                "expected": 170.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorIpi",
+                "expected": 50.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorCofins",
+                "expected": 30.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorPis",
+                "expected": 16.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorTributacaoFederal",
+                "expected": 100.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorTributacaoFederalImportados",
+                "expected": 200.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorTributacaoEstadual",
+                "expected": 150.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorTributacaoMunicipal",
+                "expected": 0.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoItemNFe",
+        "testcase": "CalcularItemServico",
+        "inputs": {
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "IsServico": true,
+            "CstPisCofins": "01",
+            "PercentualIssqn": 5.0,
+            "PercentualCofins": 3.0,
+            "PercentualPis": 1.65
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterna",
+            "tipo_pessoa": "Juridica"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorCofins",
+                "expected": 30.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorPis",
+                "expected": 16.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorIss",
+                "expected": 50.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoItemNFe",
+        "testcase": "CalcularItemServicoComRetencao",
+        "inputs": {
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "IsServico": true,
+            "CstPisCofins": "01",
+            "PercentualIssqn": 5.0,
+            "PercentualCofins": 3.0,
+            "PercentualPis": 1.65,
+            "PercentualRetIrrf": 1.65,
+            "PercentualRetCsll": 1.0,
+            "PercentualRetCofins": 3.0,
+            "PercentualRetPis": 0.65,
+            "PercentualRetInss": 11.0
+        },
+        "facade_args": {
+            "crt": "RegimeNormal",
+            "tipo_operacao": "OperacaoInterna",
+            "tipo_pessoa": "Juridica"
+        },
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorCofins",
+                "expected": 30.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorPis",
+                "expected": 16.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorIss",
+                "expected": 50.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorRetIrrf",
+                "expected": 16.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorRetCofins",
+                "expected": 30.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorRetPis",
+                "expected": 6.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorRetInss",
+                "expected": 110.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorRetClss",
+                "expected": 10.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIbpt",
+        "testcase": "CalculaIbpt",
+        "inputs": {
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualFederal": 10.0,
+            "PercentualFederalImportados": 20.0,
+            "PercentualEstadual": 15.0,
+            "PercentualMunicipal": 0.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCofins",
+                "method": "calcula_ibpt",
+                "args": [
+                    "produto"
+                ]
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCofins",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCofins",
+                "prop": "TributacaoFederal",
+                "expected": 100.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCofins",
+                "prop": "TributacaoFederalImportados",
+                "expected": 200.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCofins",
+                "prop": "TributacaoEstadual",
+                "expected": 150.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCofins",
+                "prop": "TributacaoMunicipal",
+                "expected": 0.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIssqn",
+        "testcase": "CalculoIssqn",
+        "inputs": {
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "IsServico": true,
+            "PercentualIssqn": 5.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIssqn",
+                "method": "calcula_issqn",
+                "args": [
+                    false
+                ]
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "Valor",
+                "expected": 50.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIssqn",
+        "testcase": "CalculoIssqnComDescontoIncondicional",
+        "inputs": {
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "IsServico": true,
+            "PercentualIssqn": 5.0,
+            "Desconto": 100.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Incondicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIssqn",
+                "method": "calcula_issqn",
+                "args": [
+                    false
+                ]
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "BaseCalculo",
+                "expected": 900.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "Valor",
+                "expected": 45.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIssqn",
+        "testcase": "CalculoIssqnComRetencao",
+        "inputs": {
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "IsServico": true,
+            "PercentualIssqn": 5.0,
+            "PercentualRetIrrf": 1.65,
+            "PercentualRetCsll": 1.0,
+            "PercentualRetCofins": 3.0,
+            "PercentualRetPis": 0.65,
+            "PercentualRetInss": 11.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Incondicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIssqn",
+                "method": "calcula_issqn",
+                "args": [
+                    true
+                ]
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "Valor",
+                "expected": 50.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "BaseCalculoInss",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "BaseCalculoIrrf",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "ValorRetIrrf",
+                "expected": 16.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "ValorRetCofins",
+                "expected": 30.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "ValorRetPis",
+                "expected": 6.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "ValorRetInss",
+                "expected": 110.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "ValorRetCsll",
+                "expected": 10.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIssqn",
+        "testcase": "CalculoIssqnComRetencaoComDescontoIncondicional",
+        "inputs": {
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "IsServico": true,
+            "PercentualIssqn": 5.0,
+            "Desconto": 100.0,
+            "PercentualRetIrrf": 1.65,
+            "PercentualRetCsll": 1.0,
+            "PercentualRetCofins": 3.0,
+            "PercentualRetPis": 0.65,
+            "PercentualRetInss": 11.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Incondicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIssqn",
+                "method": "calcula_issqn",
+                "args": [
+                    true
+                ]
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "BaseCalculo",
+                "expected": 900.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "Valor",
+                "expected": 45.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "BaseCalculoInss",
+                "expected": 900.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "BaseCalculoIrrf",
+                "expected": 900.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "ValorRetIrrf",
+                "expected": 14.85
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "ValorRetCofins",
+                "expected": 27.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "ValorRetPis",
+                "expected": 5.85
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "ValorRetInss",
+                "expected": 99.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIssqn",
+                "prop": "ValorRetCsll",
+                "expected": 9.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIcms",
+        "testcase": "CalcularIcmsComQuantidadeUm",
+        "inputs": {
+            "PercentualIcms": 17.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIcms",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcms",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcms",
+                "prop": "Valor",
+                "expected": 170.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIcms",
+        "testcase": "CalcularIcmsComQuantidadeDois",
+        "inputs": {
+            "PercentualIcms": 17.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 2.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIcms",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcms",
+                "prop": "BaseCalculo",
+                "expected": 4000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcms",
+                "prop": "Valor",
+                "expected": 680.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIcms",
+        "testcase": "CalcularIcmsComDescontoCondicional",
+        "inputs": {
+            "PercentualIcms": 12.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 2.0,
+            "Desconto": 1000.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Condicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIcms",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcms",
+                "prop": "BaseCalculo",
+                "expected": 5000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcms",
+                "prop": "Valor",
+                "expected": 600.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIcms",
+        "testcase": "CalcularIcmsComReducao",
+        "inputs": {
+            "PercentualIcms": 7.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 2.0,
+            "Desconto": 1000.0,
+            "PercentualReducao": 25.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Condicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIcms",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcms",
+                "prop": "BaseCalculo",
+                "expected": 3750.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcms",
+                "prop": "Valor",
+                "expected": 262.5
+            }
+        ]
+    },
+    {
+        "group": "CalculoIcms",
+        "testcase": "CalcularIcmsComFrete",
+        "inputs": {
+            "PercentualIcms": 15.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 2.0,
+            "Desconto": 1000.0,
+            "PercentualReducao": 25.0,
+            "Frete": 373.5
+        },
+        "facade_args": {
+            "tipo_desconto": "Condicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIcms",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcms",
+                "prop": "BaseCalculo",
+                "expected": 4030.12
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcms",
+                "prop": "Valor",
+                "expected": 604.52
+            }
+        ]
+    },
+    {
+        "group": "CalculoIcms",
+        "testcase": "CalcularIcmsComOutrasDespesasESeguro",
+        "inputs": {
+            "PercentualIcms": 12.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 2.0,
+            "Desconto": 1000.0,
+            "PercentualReducao": 25.0,
+            "Frete": 373.5,
+            "OutrasDespesas": 233.1,
+            "Seguro": 5.73
+        },
+        "facade_args": {
+            "tipo_desconto": "Condicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoIcms",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcms",
+                "prop": "BaseCalculo",
+                "expected": 4209.25
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoIcms",
+                "prop": "Valor",
+                "expected": 505.11
+            }
+        ]
+    },
+    {
+        "group": "CalculoDifalFcp",
+        "testcase": "CalculaDifalJuntoComFcp_AtivoImobilizado",
+        "inputs": {
+            "IsAtivoImobilizadoOuUsoeConsumo": true,
+            "ValorProduto": 845.0,
+            "QuantidadeProduto": 1.0,
+            "Frete": 35.0,
+            "OutrasDespesas": 80.0,
+            "Desconto": 10.0,
+            "ValorIpi": 50.0,
+            "PercentualFcp": 2.0,
+            "PercentualDifalInterna": 18.0,
+            "PercentualDifalInterestadual": 12.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoDifal",
+                "method": "calcula_difal_fcp",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoDifal",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoDifal",
+                "prop": "Fcp",
+                "expected": 20.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoDifal",
+                "prop": "Difal",
+                "expected": 60.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoDifal",
+                "prop": "ValorIcmsOrigem",
+                "expected": 0.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoDifal",
+                "prop": "ValorIcmsDestino",
+                "expected": 60.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIcmsCredito",
+        "testcase": "CalcularIcmsCreditoComQuantidadeUm",
+        "inputs": {
+            "PercentualCredito": 17.0,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCredito",
+                "method": "calcula_icms_credito",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCredito",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCredito",
+                "prop": "Valor",
+                "expected": 170.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIcmsCredito",
+        "testcase": "CalcularIcmsCreditoComQuantidadeDois",
+        "inputs": {
+            "PercentualCredito": 17.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 2.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCredito",
+                "method": "calcula_icms_credito",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCredito",
+                "prop": "BaseCalculo",
+                "expected": 4000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCredito",
+                "prop": "Valor",
+                "expected": 680.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIcmsCredito",
+        "testcase": "CalcularIcmsCreditoComDescontoCondicional",
+        "inputs": {
+            "PercentualCredito": 12.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 2.0,
+            "Desconto": 1000.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Condicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCredito",
+                "method": "calcula_icms_credito",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCredito",
+                "prop": "BaseCalculo",
+                "expected": 5000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCredito",
+                "prop": "Valor",
+                "expected": 600.0
+            }
+        ]
+    },
+    {
+        "group": "CalculoIcmsCredito",
+        "testcase": "CalcularIcmsCreditoComReducao",
+        "inputs": {
+            "PercentualCredito": 7.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 2.0,
+            "Desconto": 1000.0,
+            "PercentualReducao": 25.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Condicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCredito",
+                "method": "calcula_icms_credito",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCredito",
+                "prop": "BaseCalculo",
+                "expected": 3750.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCredito",
+                "prop": "Valor",
+                "expected": 262.5
+            }
+        ]
+    },
+    {
+        "group": "CalculoIcmsCredito",
+        "testcase": "CalcularIcmsCreditoComFrete",
+        "inputs": {
+            "PercentualCredito": 15.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 2.0,
+            "Desconto": 1000.0,
+            "PercentualReducao": 25.0,
+            "Frete": 373.5
+        },
+        "facade_args": {
+            "tipo_desconto": "Condicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCredito",
+                "method": "calcula_icms_credito",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCredito",
+                "prop": "BaseCalculo",
+                "expected": 4030.12
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCredito",
+                "prop": "Valor",
+                "expected": 604.52
+            }
+        ]
+    },
+    {
+        "group": "CalculoIcmsCredito",
+        "testcase": "CalcularIcmsComOutrasDespesasESeguro",
+        "inputs": {
+            "PercentualCredito": 12.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 2.0,
+            "Desconto": 1000.0,
+            "PercentualReducao": 25.0,
+            "Frete": 373.5,
+            "OutrasDespesas": 233.1,
+            "Seguro": 5.73
+        },
+        "facade_args": {
+            "tipo_desconto": "Condicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoCredito",
+                "method": "calcula_icms_credito",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCredito",
+                "prop": "BaseCalculo",
+                "expected": 4209.25
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoCredito",
+                "prop": "Valor",
+                "expected": 505.11
+            }
+        ]
+    },
+    {
+        "group": "CalculoPis",
+        "testcase": "CalculoPis",
+        "inputs": {
+            "PercentualPis": 1.65,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoPis",
+                "method": "calcula_pis",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoPis",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoPis",
+                "prop": "Valor",
+                "expected": 16.5
+            }
+        ]
+    },
+    {
+        "group": "CalculoPis",
+        "testcase": "CalculoPisComDescontoIncondicional",
+        "inputs": {
+            "PercentualPis": 1.65,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "Desconto": 100.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Incondicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoPis",
+                "method": "calcula_pis",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoPis",
+                "prop": "BaseCalculo",
+                "expected": 900.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoPis",
+                "prop": "Valor",
+                "expected": 14.85
+            }
+        ]
+    },
+    {
+        "group": "CalculoPis",
+        "testcase": "CalculoPisComIpiZero",
+        "inputs": {
+            "PercentualPis": 1.65,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "ValorIpi": 0.0
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultadoCalculoPis",
+                "method": "calcula_pis",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoPis",
+                "prop": "BaseCalculo",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoPis",
+                "prop": "Valor",
+                "expected": 16.5
+            }
+        ]
+    },
+    {
+        "group": "CalculoPis",
+        "testcase": "CalculoPisComIpiZeroComDescontoIncondicional",
+        "inputs": {
+            "PercentualPis": 1.65,
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "ValorIpi": 0.0,
+            "Desconto": 100.0
+        },
+        "facade_args": {
+            "tipo_desconto": "Incondicional"
+        },
+        "executions": [
+            {
+                "var_name": "resultadoCalculoPis",
+                "method": "calcula_pis",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoPis",
+                "prop": "BaseCalculo",
+                "expected": 900.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultadoCalculoPis",
+                "prop": "Valor",
+                "expected": 14.85
+            }
+        ]
+    },
+    {
+        "group": "Cst20",
+        "testcase": "CalculoCST20",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 100.0,
+            "PercentualIcms": 18.0,
+            "PercentualReducao": 10.0,
+            "Cst": "20"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "cst",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualReducao",
+                "expected": 10.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorBcIcms",
+                "expected": 90.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualIcms",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorIcms",
+                "expected": 16.2
+            }
+        ]
+    },
+    {
+        "group": "Cst70",
+        "testcase": "CalculoCst70",
+        "inputs": {
+            "PercentualIcms": 18.0,
+            "PercentualIcmsSt": 18.0,
+            "PercentualReducao": 10.0,
+            "PercentualReducaoSt": 10.0,
+            "ValorProduto": 100.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualMva": 100.0,
+            "Cst": "70"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "cst",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ModalidadeDeterminacaoBcIcms",
+                "expected": "ValorOperacao"
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualReducao",
+                "expected": 10.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorBcIcms",
+                "expected": 90.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualIcms",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorIcms",
+                "expected": 16.2
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ModalidadeDeterminacaoBcIcmsSt",
+                "expected": "MargemValorAgregado"
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualMva",
+                "expected": 100.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualReducaoSt",
+                "expected": 10.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorBcIcmsSt",
+                "expected": 180.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualIcmsSt",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorIcmsSt",
+                "expected": 16.2
+            }
+        ]
+    },
+    {
+        "group": "Cst70",
+        "testcase": "CalculoCst70_ValoresSeparados",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 80.0,
+            "Frete": 5.0,
+            "Seguro": 2.0,
+            "OutrasDespesas": 3.0,
+            "Desconto": 20.0,
+            "PercentualIpi": 5.0,
+            "PercentualIcms": 18.0,
+            "PercentualIcmsSt": 18.0,
+            "PercentualReducao": 61.11,
+            "PercentualReducaoSt": 61.11,
+            "PercentualMva": 52.9,
+            "Cst": "70"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "cst",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ModalidadeDeterminacaoBcIcms",
+                "expected": "ValorOperacao"
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualIcms",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualReducao",
+                "expected": 61.11
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorBcIcms",
+                "expected": 27.22
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorIcms",
+                "expected": 4.9
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ModalidadeDeterminacaoBcIcmsSt",
+                "expected": "MargemValorAgregado"
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualIcmsSt",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualReducaoSt",
+                "expected": 61.11
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualMva",
+                "expected": 52.9
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorBcIcmsSt",
+                "expected": 43.71
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorIcmsSt",
+                "expected": 2.97
+            }
+        ]
+    },
+    {
+        "group": "Cst30",
+        "testcase": "CalculoCST30",
+        "inputs": {
+            "PercentualIcmsSt": 18.0,
+            "ValorProduto": 100.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualMva": 50.0,
+            "PercentualReducaoSt": 10.0,
+            "Cst": "30"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "cst",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualMva",
+                "expected": 50.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualReducaoSt",
+                "expected": 10.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorBcIcmsSt",
+                "expected": 135.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualIcmsSt",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorIcmsSt",
+                "expected": 24.3
+            }
+        ]
+    },
+    {
+        "group": "Cst10",
+        "testcase": "CalculoCST10",
+        "inputs": {
+            "ValorProduto": 100.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualIcms": 18.0,
+            "PercentualIcmsSt": 18.0,
+            "PercentualMva": 50.0,
+            "Cst": "10"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "cst",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualIcms",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualIcmsSt",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualMva",
+                "expected": 50.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorBcIcms",
+                "expected": 100.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorIcms",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorBcIcmsSt",
+                "expected": 150.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorIcmsSt",
+                "expected": 9.0
+            }
+        ]
+    },
+    {
+        "group": "Cst60",
+        "testcase": "CalculaCst60",
+        "inputs": {
+            "CalcularIcmsEfetivoeRetencaoParaSt": true,
+            "Documento": "NFe",
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 1000.0,
+            "PercentualIcmsSt": 18.0,
+            "Cst": "60"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "cst",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualBcStRetido",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorBcStRetido",
+                "expected": 1000.0
+            }
+        ]
+    },
+    {
+        "group": "Cst60",
+        "testcase": "CalculaCST60_ICMSEfetivo",
+        "inputs": {
+            "CalcularIcmsEfetivoeRetencaoParaSt": true,
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 1000.0,
+            "PercentualIcmsEfetivo": 20.0,
+            "PercentualReducaoIcmsEfetivo": 20.0,
+            "Cst": "60"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "cst60",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "cst60",
+                "prop": "ValorBcIcmsEfetivo",
+                "expected": 800.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst60",
+                "prop": "ValorIcmsEfetivo",
+                "expected": 160.0
+            }
+        ]
+    },
+    {
+        "group": "Cst51",
+        "testcase": "CalculoCST51",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 1000.0,
+            "PercentualIcms": 18.0,
+            "PercentualDiferimento": 33.33,
+            "Cst": "51"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "cst",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorBcIcms",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualIcms",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorIcmsOperacao",
+                "expected": 180.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualDiferimento",
+                "expected": 33.33
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorIcmsDiferido",
+                "expected": 60.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorIcms",
+                "expected": 120.0
+            }
+        ]
+    },
+    {
+        "group": "Cst00",
+        "testcase": "CalculoCST00",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 1000.0,
+            "PercentualIcms": 18.0,
+            "Cst": "00"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "cst",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorIcms",
+                "expected": 180.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualIcms",
+                "expected": 18.0
+            }
+        ]
+    },
+    {
+        "group": "Cst00",
+        "testcase": "CalculoCST00ComDesconto",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 1000.0,
+            "PercentualIcms": 18.0,
+            "Frete": 200.0,
+            "Desconto": 100.0,
+            "Cst": "00"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "cst",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorBcIcms",
+                "expected": 1100.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorIcms",
+                "expected": 198.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualIcms",
+                "expected": 18.0
+            }
+        ]
+    },
+    {
+        "group": "Cst00",
+        "testcase": "CalculoCST00ComFrete",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 1000.0,
+            "PercentualIcms": 18.0,
+            "Frete": 100.0,
+            "Cst": "00"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "cst",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorBcIcms",
+                "expected": 1100.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorIcms",
+                "expected": 198.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualIcms",
+                "expected": 18.0
+            }
+        ]
+    },
+    {
+        "group": "Cst00",
+        "testcase": "CalculoCST00ComFreteDespesa",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 1000.0,
+            "PercentualIcms": 18.0,
+            "Frete": 100.0,
+            "OutrasDespesas": 10.0,
+            "Seguro": 10.0,
+            "Cst": "00"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "cst",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorBcIcms",
+                "expected": 1120.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorIcms",
+                "expected": 201.6
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualIcms",
+                "expected": 18.0
+            }
+        ]
+    },
+    {
+        "group": "Cst90",
+        "testcase": "CalculoCst90ICMSProprio",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 100.0,
+            "PercentualIcms": 18.0,
+            "PercentualReducao": 10.0,
+            "Cst": "90"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "cst",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ModalidadeDeterminacaoBcIcms",
+                "expected": "ValorOperacao"
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorBcIcms",
+                "expected": 90.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualIcms",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorIcms",
+                "expected": 16.2
+            }
+        ]
+    },
+    {
+        "group": "Cst90",
+        "testcase": "CalculoCst90ICMSST",
+        "inputs": {
+            "PercentualIcms": 18.0,
+            "PercentualIcmsSt": 18.0,
+            "PercentualReducao": 10.0,
+            "PercentualReducaoSt": 10.0,
+            "PercentualMva": 100.0,
+            "ValorProduto": 100.0,
+            "QuantidadeProduto": 1.0,
+            "Cst": "90"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "cst",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ModalidadeDeterminacaoBcIcmsSt",
+                "expected": "MargemValorAgregado"
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualMva",
+                "expected": 100.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualReducaoSt",
+                "expected": 10.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "PercentualIcmsSt",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorBcIcms",
+                "expected": 90.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorIcmsSt",
+                "expected": 16.2
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorBcIcmsSt",
+                "expected": 180.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "cst",
+                "prop": "ValorIcmsSt",
+                "expected": 16.2
+            }
+        ]
+    },
+    {
+        "group": "Csosn500",
+        "testcase": "TestaCalculoICMSEfetivo",
+        "inputs": {
+            "CalcularIcmsEfetivoeRetencaoParaSt": true,
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 1000.0,
+            "PercentualIcmsEfetivo": 20.0,
+            "PercentualReducaoIcmsEfetivo": 20.0,
+            "Csosn": 500
+        },
+        "facade_args": {
+            "csosn": 500
+        },
+        "executions": [
+            {
+                "var_name": "csosn500",
+                "method": "calcula_csosn",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "csosn500",
+                "prop": "ValorBcIcmsEfetivo",
+                "expected": 800.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn500",
+                "prop": "ValorIcmsEfetivo",
+                "expected": 160.0
+            }
+        ]
+    },
+    {
+        "group": "Csosn900",
+        "testcase": "TestaCsosn900",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 2000.0,
+            "PercentualCredito": 17.0,
+            "PercentualIcms": 18.0,
+            "PercentualIcmsSt": 18.0,
+            "PercentualIpi": 15.0,
+            "PercentualMva": 40.0,
+            "Csosn": 900
+        },
+        "facade_args": {
+            "csosn": 900
+        },
+        "executions": [
+            {
+                "var_name": "csosn900",
+                "method": "calcula_csosn",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "ValorCredito",
+                "expected": 340.00
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "PercentualCredito",
+                "expected": 17.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "PercentualIcmsSt",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "PercentualMva",
+                "expected": 40.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "ValorBcIcmsSt",
+                "expected": 3220.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "ValorIcmsSt",
+                "expected": 219.6
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "ValorBcIcms",
+                "expected": 2000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "ValorIcms",
+                "expected": 360.0
+            }
+        ]
+    },
+    {
+        "group": "Csosn900",
+        "testcase": "TestaCsosn900ComReducaoSt",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 2000.0,
+            "PercentualCredito": 17.0,
+            "PercentualIcms": 18.0,
+            "PercentualIcmsSt": 18.0,
+            "PercentualIpi": 15.0,
+            "PercentualMva": 40.0,
+            "PercentualReducaoSt": 10.0,
+            "Csosn": 900
+        },
+        "facade_args": {
+            "csosn": 900
+        },
+        "executions": [
+            {
+                "var_name": "csosn900",
+                "method": "calcula_csosn",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "ValorCredito",
+                "expected": 340.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "PercentualCredito",
+                "expected": 17.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "PercentualIcmsSt",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "PercentualMva",
+                "expected": 40.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "PercentualReducaoSt",
+                "expected": 10.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "ValorBcIcmsSt",
+                "expected": 2898.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "ValorIcmsSt",
+                "expected": 161.64
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "ValorBcIcms",
+                "expected": 2000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "ValorIcms",
+                "expected": 360.0
+            }
+        ]
+    },
+    {
+        "group": "Csosn900",
+        "testcase": "Testa__Percentual12__ProdutoValor38",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 38.0,
+            "PercentualIcms": 12.0,
+            "Csosn": 900
+        },
+        "facade_args": {
+            "csosn": 900
+        },
+        "executions": [
+            {
+                "var_name": "csosn900",
+                "method": "calcula_csosn",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "ValorIcms",
+                "expected": 4.56
+            }
+        ]
+    },
+    {
+        "group": "Csosn900",
+        "testcase": "Testa__IcmsST_16Porcento",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 38.0,
+            "PercentualIcms": 12.0,
+            "PercentualIcmsSt": 16.0,
+            "Csosn": 900
+        },
+        "facade_args": {
+            "csosn": 900
+        },
+        "executions": [
+            {
+                "var_name": "csosn900",
+                "method": "calcula_csosn",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "ValorIcmsSt",
+                "expected": 1.52
+            }
+        ]
+    },
+    {
+        "group": "Csosn900",
+        "testcase": "Testa_IcmsST_ComIPI",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 38.0,
+            "PercentualIcms": 12.0,
+            "PercentualIcmsSt": 16.0,
+            "PercentualIpi": 15.0,
+            "Csosn": 900
+        },
+        "facade_args": {
+            "csosn": 900
+        },
+        "executions": [
+            {
+                "var_name": "csosn900",
+                "method": "calcula_csosn",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "ValorIcmsSt",
+                "expected": 2.43
+            }
+        ]
+    },
+    {
+        "group": "Csosn900",
+        "testcase": "Testa_IcmsST_ComIPI_ComDesconto",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 38.0,
+            "PercentualIcms": 12.0,
+            "PercentualIcmsSt": 16.0,
+            "PercentualIpi": 15.0,
+            "Desconto": 2.53,
+            "Csosn": 900
+        },
+        "facade_args": {
+            "csosn": 900
+        },
+        "executions": [
+            {
+                "var_name": "csosn900",
+                "method": "calcula_csosn",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "ValorIcmsSt",
+                "expected": 2.27
+            }
+        ]
+    },
+    {
+        "group": "Csosn900",
+        "testcase": "Testa_IcmsST_ComIPI_ComDesconto_ComMVA",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 38.0,
+            "PercentualIcms": 12.0,
+            "PercentualIcmsSt": 16.0,
+            "PercentualIpi": 15.0,
+            "Desconto": 2.53,
+            "PercentualMva": 50.0,
+            "Csosn": 900
+        },
+        "facade_args": {
+            "csosn": 900
+        },
+        "executions": [
+            {
+                "var_name": "csosn900",
+                "method": "calcula_csosn",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "ValorIcmsSt",
+                "expected": 5.53
+            }
+        ]
+    },
+    {
+        "group": "Csosn900",
+        "testcase": "Testa_IcmsST_ComIPI_ComDesconto_ComMVA_ResultadoBaseCalculoST",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 38.0,
+            "PercentualIcms": 12.0,
+            "PercentualIcmsSt": 16.0,
+            "PercentualIpi": 15.0,
+            "Desconto": 2.53,
+            "PercentualMva": 50.0,
+            "Csosn": 900
+        },
+        "facade_args": {
+            "csosn": 900
+        },
+        "executions": [
+            {
+                "var_name": "csosn900",
+                "method": "calcula_csosn",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "csosn900",
+                "prop": "ValorBcIcmsSt",
+                "expected": 61.18
+            }
+        ]
+    },
+    {
+        "group": "Csosn203",
+        "testcase": "TestaCsosn203",
+        "inputs": {
+            "PercentualIcms": 18.0,
+            "PercentualIcmsSt": 18.0,
+            "PercentualIpi": 15.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualMva": 40.0,
+            "Csosn": 203
+        },
+        "facade_args": {
+            "csosn": 203
+        },
+        "executions": [
+            {
+                "var_name": "csosn203",
+                "method": "calcula_csosn",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "csosn203",
+                "prop": "PercentualIcmsSt",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn203",
+                "prop": "PercentualMvaSt",
+                "expected": 40.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn203",
+                "prop": "PercentualReducaoSt",
+                "expected": 0.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn203",
+                "prop": "ValorBcIcmsSt",
+                "expected": 3220.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn203",
+                "prop": "ValorIcmsSt",
+                "expected": 219.6
+            }
+        ]
+    },
+    {
+        "group": "Csosn202",
+        "testcase": "TestaCsosn202",
+        "inputs": {
+            "PercentualIcms": 18.0,
+            "PercentualIcmsSt": 18.0,
+            "PercentualIpi": 15.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualMva": 40.0,
+            "Csosn": 202
+        },
+        "facade_args": {
+            "csosn": 202
+        },
+        "executions": [
+            {
+                "var_name": "csosn202",
+                "method": "calcula_csosn",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "csosn202",
+                "prop": "PercentualIcmsSt",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn202",
+                "prop": "PercentualMvaSt",
+                "expected": 40.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn202",
+                "prop": "PercentualReducaoSt",
+                "expected": 0.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn202",
+                "prop": "ValorBcIcmsSt",
+                "expected": 3220.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn202",
+                "prop": "ValorIcmsSt",
+                "expected": 219.6
+            }
+        ]
+    },
+    {
+        "group": "Csosn202",
+        "testcase": "TestaCsosn202ComReducao",
+        "inputs": {
+            "PercentualIcms": 18.0,
+            "PercentualReducao": 61.11,
+            "PercentualIcmsSt": 18.0,
+            "PercentualReducaoSt": 61.11,
+            "PercentualIpi": 15.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualMva": 40.0,
+            "Csosn": 202
+        },
+        "facade_args": {
+            "csosn": 202
+        },
+        "executions": [
+            {
+                "var_name": "csosn202",
+                "method": "calcula_csosn",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "csosn202",
+                "prop": "PercentualIcmsSt",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn202",
+                "prop": "PercentualMvaSt",
+                "expected": 40.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn202",
+                "prop": "PercentualReducaoSt",
+                "expected": 61.11
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn202",
+                "prop": "ValorBcIcmsSt",
+                "expected": 1252.26
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn202",
+                "prop": "ValorIcmsSt",
+                "expected": 85.4
+            }
+        ]
+    },
+    {
+        "group": "Csosn101",
+        "testcase": "TestaCalculoCsosn101",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 1000.0,
+            "PercentualCredito": 17.0,
+            "Csosn": 101
+        },
+        "facade_args": {
+            "csosn": 101
+        },
+        "executions": [
+            {
+                "var_name": "csosn101",
+                "method": "calcula_csosn",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "csosn101",
+                "prop": "ValorCredito",
+                "expected": 170.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn101",
+                "prop": "PercentualCredito",
+                "expected": 17.0
+            }
+        ]
+    },
+    {
+        "group": "Csosn101",
+        "testcase": "TestaCalculoCsosn101ComDescontoIncodicional",
+        "inputs": {
+            "QuantidadeProduto": 1.0,
+            "ValorProduto": 1000.0,
+            "PercentualCredito": 17.0,
+            "Desconto": 100.0,
+            "Csosn": 101
+        },
+        "facade_args": {
+            "csosn": 101
+        },
+        "executions": [
+            {
+                "var_name": "csosn101",
+                "method": "calcula_csosn",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "csosn101",
+                "prop": "ValorCredito",
+                "expected": 153.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn101",
+                "prop": "PercentualCredito",
+                "expected": 17.0
+            }
+        ]
+    },
+    {
+        "group": "Csosn201",
+        "testcase": "TestaCsosn201",
+        "inputs": {
+            "PercentualIcms": 18.0,
+            "PercentualIcmsSt": 18.0,
+            "PercentualIpi": 15.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualMva": 40.0,
+            "PercentualCredito": 5.0,
+            "Csosn": 201
+        },
+        "facade_args": {
+            "csosn": 201
+        },
+        "executions": [
+            {
+                "var_name": "csosn201",
+                "method": "calcula_csosn",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "csosn201",
+                "prop": "PercentualIcmsSt",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn201",
+                "prop": "PercentualCredito",
+                "expected": 5.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn201",
+                "prop": "PercentualMva",
+                "expected": 40.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn201",
+                "prop": "PercentualReducaoSt",
+                "expected": 0.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn201",
+                "prop": "ValorBcIcmsSt",
+                "expected": 3220.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn201",
+                "prop": "ValorIcmsSt",
+                "expected": 219.6
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn201",
+                "prop": "ValorCredito",
+                "expected": 100.0
+            }
+        ]
+    },
+    {
+        "group": "Csosn201",
+        "testcase": "TestaCsosn201ComReducao",
+        "inputs": {
+            "PercentualIcms": 18.0,
+            "PercentualReducao": 61.11,
+            "PercentualIcmsSt": 18.0,
+            "PercentualReducaoSt": 61.11,
+            "PercentualIpi": 15.0,
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualMva": 40.0,
+            "PercentualCredito": 5.0,
+            "Csosn": 201
+        },
+        "facade_args": {
+            "csosn": 201
+        },
+        "executions": [
+            {
+                "var_name": "csosn201",
+                "method": "calcula_csosn",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "csosn201",
+                "prop": "PercentualIcmsSt",
+                "expected": 18.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn201",
+                "prop": "PercentualCredito",
+                "expected": 5.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn201",
+                "prop": "PercentualMva",
+                "expected": 40.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn201",
+                "prop": "PercentualReducaoSt",
+                "expected": 61.11
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn201",
+                "prop": "ValorBcIcmsSt",
+                "expected": 1252.26
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn201",
+                "prop": "ValorIcmsSt",
+                "expected": 85.4
+            },
+            {
+                "type": "Equal",
+                "target_var": "csosn201",
+                "prop": "ValorCredito",
+                "expected": 100.0
+            }
+        ]
+    }
+]
