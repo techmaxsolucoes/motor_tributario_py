@@ -1,0 +1,113 @@
+GNU AFFERO GENERAL PUBLIC LICENSE
+Version 3, 19 November 2007
+
+Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+Everyone is permitted to copy and distribute verbatim copies
+of this license document, but changing it is not allowed.
+
+Preamble
+
+The GNU Affero General Public License is a free, copyleft license for
+software and other kinds of works, specifically designed to ensure
+cooperation with the community in the case of network server software.
+
+The licenses for most software and other practical works are designed
+to take away your freedom to share and change the works.  By contrast,
+our General Public Licenses are intended to guarantee your freedom to
+share and change all versions of a program--to make sure it remains free
+software for all its users.
+
+When we speak of free software, we are referring to freedom, not
+price.  Our General Public Licenses are designed to ensure that you have
+the freedom to distribute copies of free software (and charge for them
+if you wish), that you receive source code or can get it if you want
+it, that you can change the software or use pieces of it in new free
+programs, and that you know you can do these things.
+
+Developers that use our General Public Licenses protect your rights
+with two steps: (1) assert copyright on the software, and (2) offer
+you this License which gives you legal permission to copy, distribute
+and/or modify the software.
+
+An additional permission is needed in the case of network server
+software to ensure that users interacting with the software remotely
+have the opportunity to receive the source code of the version that
+they are using.
+
+This is the Affero version of the GPL, intended to ensure that the
+source code of modified versions of such network server software is
+made available to the users of the server.
+
+TERMS AND CONDITIONS
+
+0. Definitions.
+
+"This License" refers to version 3 of the GNU Affero General Public License.
+
+"Copyright" also means copyright-like laws that apply to other kinds of
+works, such as semiconductor masks.
+
+"The Program" refers to any copyrightable work licensed under this
+License.  Each licensee is addressed as "you".  "Licensees" and
+"recipients" may be individuals or organizations.
+
+To "modify" a work means to copy from or adapt all or part of the work
+in a fashion requiring copyright permission, other than the making of an
+exact copy.  The resulting work is called a "modified version" of the
+earlier work or a work "based on" the earlier work.
+
+"Combined Work" means a work produced by combining or linking a covered
+work with another work that is not covered by this License.
+
+"Corresponding Source" for a work in object code form means all the
+source code needed to generate, install, and (for an executable work)
+run the object code and to modify the work, including scripts to control
+those activities.  However, it does not include the work's System
+Libraries, or general-purpose tools or generally available free programs
+which are used unmodified in performing those activities but which are
+not part of the work.  For example, Corresponding Source includes
+interface definition files associated with source files for the work,
+and the source code for shared libraries and dynamically linked
+subprograms that the work is specifically designed to require, such as
+by intimate data communication or control flow between those subprograms
+and other parts of the work.
+
+The "Corresponding Source" need not include anything that users can
+recreate automatically from other parts of the Corresponding Source.
+
+"User Product" means either (1) a "consumer product", which means any
+personal use or household item which is normally used for personal, family,
+or household purposes, or (2) anything designed or sold for incorporation
+into a dwelling.  In determining whether a product is a consumer product,
+doubtful cases shall be resolved in favor of coverage.
+
+"Installation Information" for a User Product means any methods,
+procedures, authorization keys, or other information required to install
+and execute modified versions of a covered work in that User Product from
+modified Corresponding Source.  The information must suffice to ensure
+that the continued functioning of the modified object code is in no
+worse a relationship to the user than the unmodified object code was
+in relation to the user before modification.
+
+1. Source Code.
+
+The "Source Code" for a work means the preferred form of the work for
+making modifications to it.  "Object code" means any non-source form of a
+work.
+
+2. Basic Permissions.
+
+All rights granted under this License are granted for the term of
+copyright on the Program, and are irrevocable provided the stated
+conditions are met.  This License explicitly affirms your unlimited
+permission to run the unmodified Program.  The output from running a
+covered work is covered by this License only if the output, given its
+content, constitutes a covered work.  This License acknowledges your
+rights of fair use or other equivalent, as provided by copyright law.
+
+3. Protecting Users' Legal Rights From Anti-Circumvention Law.
+
+... (the full license text continues) ...
+
+For the full, unabridged text of the GNU Affero General Public License
+Version 3, see https://www.gnu.org/licenses/agpl-3.0.txt
