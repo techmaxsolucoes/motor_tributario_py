@@ -34,18 +34,12 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f motor_tributario_py/pyproject.toml ]; then
-            pip install -e motor_tributario_py
-          else
-            pip install -e .
-          fi
-          if [ -f motor_tributario_py/requirements.txt ]; then
-            pip install -r motor_tributario_py/requirements.txt
+          pip install -e .
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
           fi
           pip install pytest
 
       - name: Run tests
         run: |
-          echo "$(pwd)"
-          echo "$(ls -alt)"
-          pytest -q motor_tributario_py
+          pytest -q tests
