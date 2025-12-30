@@ -290,6 +290,46 @@ Notes:
   - `taxes/` - individual tax calculators (icms, pis, cofins, ipi, difal, etc.)
   - `utils/`, `audit.py` - helpers and auditing utilities
 
+## Architecture
+
+A high-level diagram showing how data and decisions flow through the package.
+
+```mermaid
+flowchart LR
+  In[Input: Tributavel (data model)] --> Facade[FacadeCalculadoraTributacao]
+  Facade --> Calculators[Tax Calculators (taxes/ modules)]
+  Calculators -->|use rules| Rules[DMN-style rules (rules/)]
+  Rules -->|decision logic| Calculators
+  Facade --> Audit[AuditManager / ExecutionReport]
+  Audit --> Pretty[Human-readable report]
+  Audit --> JSON[Structured JSON report]
+  Facade --> API[Public API: calcula_icms, calcula_tributacao, ...]
+
+  subgraph Repo
+    R1[rules/ (DMN-backed rule sources)]
+    R2[taxes/ (calculator implementations)]
+    R3[audit.py (reporting & tracing)]
+    R4[scripts/ (embed_rules_into_readme, run_debug_example)]
+  end
+
+  Rules --- R1
+  Calculators --- R2
+  Audit --- R3
+  Facade --- R4
+
+  style In fill:#f9f,stroke:#333,stroke-width:1px
+  style Facade fill:#fffbcc,stroke:#333,stroke-width:1px
+  style Rules fill:#ccf,stroke:#333,stroke-width:1px
+  style Calculators fill:#cfc,stroke:#333,stroke-width:1px
+  style Audit fill:#fdd,stroke:#333,stroke-width:1px
+```
+
+- `Tributavel` is the single data holder for product/invoice values and rates.
+- `FacadeCalculadoraTributacao` orchestrates calculators and consults DMN-backed rule tables when needed.
+- `rules/` contains the DMN-style rule definitions (displayed in the README) and are consulted via `bkflow-dmn` when decisions are required.
+- `taxes/` implements the numeric calculations; `audit.py` captures the evaluation trace and produces both human-readable and JSON reports.
+- `scripts/` includes helpers used to embed rule documentation and to produce the debug example included in this README.
+
 ## Tests
 
 Unit tests and fixtures live under `tests/`. Run them with pytest:
