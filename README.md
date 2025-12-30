@@ -292,43 +292,37 @@ Notes:
 
 ## Architecture
 
-A high-level diagram showing how data and decisions flow through the package.
+Diagrama simplificado mostrando o fluxo de dados e decisões dentro do pacote.
 
 ```mermaid
 flowchart LR
-  In[Input: Tributavel (data model)] --> Facade[FacadeCalculadoraTributacao]
-  Facade --> Calculators[Tax Calculators (taxes/ modules)]
-  Calculators -->|use rules| Rules[DMN-style rules (rules/)]
+  In(("Tributavel\n(data model)")) --> Facade["FacadeCalculadoraTributacao"]
+  Facade --> Calculators["Tax Calculators\n(taxes/)" ]
+  Calculators -->|uses rules| Rules["DMN rules\n(rules/)"]
   Rules -->|decision logic| Calculators
-  Facade --> Audit[AuditManager / ExecutionReport]
-  Audit --> Pretty[Human-readable report]
-  Audit --> JSON[Structured JSON report]
-  Facade --> API[Public API: calcula_icms, calcula_tributacao, ...]
+  Facade --> Audit["AuditManager / ExecutionReport"]
+  Audit --> Pretty["Human-readable report"]
+  Audit --> JSON["JSON report"]
+  Facade --> API["Public API\n(calcula_icms, calcula_tributacao)"]
 
   subgraph Repo
-    R1[rules/ (DMN-backed rule sources)]
-    R2[taxes/ (calculator implementations)]
-    R3[audit.py (reporting & tracing)]
-    R4[scripts/ (embed_rules_into_readme, run_debug_example)]
+    R1["rules/ (DMN-backed)"]
+    R2["taxes/ (calculators)"]
+    R3["audit.py (reporting)"]
+    R4["scripts/ (helpers)"]
   end
 
-  Rules --- R1
-  Calculators --- R2
-  Audit --- R3
-  Facade --- R4
-
-  style In fill:#f9f,stroke:#333,stroke-width:1px
-  style Facade fill:#fffbcc,stroke:#333,stroke-width:1px
-  style Rules fill:#ccf,stroke:#333,stroke-width:1px
-  style Calculators fill:#cfc,stroke:#333,stroke-width:1px
-  style Audit fill:#fdd,stroke:#333,stroke-width:1px
+  R1 --> Rules
+  R2 --> Calculators
+  R3 --> Audit
+  R4 --> Facade
 ```
 
-- `Tributavel` is the single data holder for product/invoice values and rates.
-- `FacadeCalculadoraTributacao` orchestrates calculators and consults DMN-backed rule tables when needed.
-- `rules/` contains the DMN-style rule definitions (displayed in the README) and are consulted via `bkflow-dmn` when decisions are required.
-- `taxes/` implements the numeric calculations; `audit.py` captures the evaluation trace and produces both human-readable and JSON reports.
-- `scripts/` includes helpers used to embed rule documentation and to produce the debug example included in this README.
+- `Tributavel` é o objeto de dados com valores e percentuais do item/documento.
+- `FacadeCalculadoraTributacao` orquestra as chamadas aos calculadores e consulta tabelas de decisão quando necessário.
+- `rules/` contém definições de regras estilo DMN consultadas via `bkflow-dmn`.
+- `taxes/` implementa os cálculos numéricos; `audit.py` gera traços para depuração e relatórios em texto/JSON.
+- `scripts/` contém utilitários usados para gerar a documentação embutida e exemplos de depuração.
 
 ## Tests
 

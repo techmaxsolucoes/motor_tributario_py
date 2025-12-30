@@ -16,9 +16,6 @@ dependencies = [
     "bkflow-feel @ git+https://github.com/techmaxsolucoes/bkflow-feel.git",
 ]
 
-[tool.setuptools]
-packages = { find = {} }
-
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["motor_tributario_py*"]
