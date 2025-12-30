@@ -26,10 +26,10 @@ source .venv/bin/activate
 pip install -e .
 ```
 
-Or install directly from the repository (if published on PyPI replace the URL):
+Or install directly from the repository:
 
 ```bash
-pip install git+https://your-repo-url.git
+pip install git+https://github.com/techmaxsolucoes/motor_tributario_py.git#egg=motor_tributario_py
 ```
 
 Requires a modern Python 3 interpreter (3.8+ recommended).
@@ -67,6 +67,214 @@ print('Valor COFINS:', resultado.valor_cofins)
 # Audit/debug example
 report = facade.debug_execution('calcula_icms')
 print(report.format_pretty())
+```
+
+## Audit/debug example output (pretty)
+
+```text
+================================================================================
+EXECUTION REPORT: calcula_icms
+================================================================================
+
+INPUTS:
+  args: ()
+  kwargs: {}
+
+  Tributavel:
+    valor_produto: 100.00
+    quantidade_produto: 1
+    tipo_desconto: Incondicional
+    percentual_icms: 18.0
+    percentual_pis: 1.65
+    percentual_cofins: 7.6
+
+DECISION TRACE:
+
+  [1] Full ICMS Calculation Rules
+      Total Rules: 4
+      Matched: [3]
+
+      ━━━ Rule #4 ━━━
+      Input Conditions:
+        • is_ativo: false
+        • tipo_desconto: "Incondicional"
+      Output Calculations:
+        • base_calculo = ( ( ( ( (valor_produto * quantidade_produto) + frete) + seguro) + outras_despesas) - desconto ) * (decimal(1) - (percentual_reducao / decimal(100)))
+          Evaluated: ( ( ( ( (100.00 * 1) + 0) + 0) + 0) - 0 ) * (decimal(1) - (0 / decimal(100)))
+          → Result: 100.00
+        • valor_final = ( ( ( ( ( ( (valor_produto * quantidade_produto) + frete) + seguro) + outras_despesas) - desconto ) * (decimal(1) - (percentual_reducao / decimal(100))) ) * percentual_icms) / decimal(100)
+          Evaluated: ( ( ( ( ( ( (100.00 * 1) + 0) + 0) + 0) - 0 ) * (decimal(1) - (0 / decimal(100))) ) * 18.0) / decimal(100)
+          → Result: 18.000
+
+FINAL RESULT:
+  base_calculo: 100.00
+  valor: 18.000
+  percentual_icms: 18.0
+  percentual_reducao: 0
+  percentual_icms_st: 0
+  percentual_mva: 0
+  base_calculo_st: None
+  valor_icms_st: None
+  percentual_reducao_st: 0.00
+  percentual_diferimento: 0.00
+  valor_icms_diferido: None
+  valor_icms_operacao: None
+  valor_bc_st_retido: 100.00
+  base_calculo_icms_efetivo: None
+  valor_icms_efetivo: None
+  modalidade_determinacao_bc_icms: ValorOperacao
+  modalidade_determinacao_bc_icms_st: None
+
+================================================================================
+```
+
+## Audit/debug example output (JSON)
+
+```json
+{
+  "method_name": "calcula_icms",
+  "inputs": {
+    "tributavel": {
+      "valor_produto": 100.0,
+      "frete": 0.0,
+      "seguro": 0.0,
+      "outras_despesas": 0.0,
+      "desconto": 0.0,
+      "valor_ipi": 0.0,
+      "quantidade_produto": 1.0,
+      "is_servico": false,
+      "is_ativo_imobilizado_ou_uso_consumo": false,
+      "tipo_desconto": "Incondicional",
+      "cst": "",
+      "tipo_calculo_icms_desonerado": "",
+      "crt": "",
+      "tipo_operacao": "",
+      "tipo_pessoa": "",
+      "percentual_icms": 18.0,
+      "percentual_reducao": 0.0,
+      "percentual_ipi": 0.0,
+      "percentual_pis": 1.65,
+      "percentual_reducao_pis": 0.0,
+      "percentual_cofins": 7.6,
+      "percentual_reducao_cofins": 0.0,
+      "percentual_icms_st": 0.0,
+      "percentual_mva": 0.0,
+      "percentual_reducao_st": 0.0,
+      "percentual_fcp": 0.0,
+      "percentual_fcp_st": 0.0,
+      "percentual_credito": 0.0,
+      "csosn": 0,
+      "percentual_fcp_st_retido": 0.0,
+      "valor_ultima_base_calculo_icms_st_retido": 0.0,
+      "percentual_difal_interna": 0.0,
+      "percentual_difal_interestadual": 0.0,
+      "percentual_issqn": 0.0,
+      "percentual_ret_pis": 0.0,
+      "percentual_ret_cofins": 0.0,
+      "percentual_ret_csll": 0.0,
+      "percentual_ret_irrf": 0.0,
+      "percentual_ret_inss": 0.0,
+      "percentual_federal": 0.0,
+      "percentual_estadual": 0.0,
+      "percentual_municipal": 0.0,
+      "percentual_federal_importados": 0.0,
+      "percentual_ibs_uf": 0.0,
+      "percentual_ibs_municipal": 0.0,
+      "percentual_cbs": 0.0,
+      "percentual_reducao_ibs_uf": 0.0,
+      "percentual_reducao_ibs_municipal": 0.0,
+      "percentual_reducao_cbs": 0.0,
+      "documento": "",
+      "percentual_icms_efetivo": 0.0,
+      "percentual_reducao_icms_efetivo": 0.0,
+      "quantidade_base_calculo_icms_monofasico": 0.0,
+      "aliquota_ad_rem_icms": 0.0,
+      "percentual_reducao_aliquota_ad_rem_icms": 0.0,
+      "percentual_biodiesel": 0.0,
+      "percentual_originario_uf": 0.0,
+      "quantidade_base_calculo_icms_monofasico_retido_anteriormente": 0.0,
+      "aliquota_ad_rem_icms_retido_anteriormente": 0.0,
+      "somar_pis_na_base_ibs_cbs": false,
+      "somar_cofins_na_base_ibs_cbs": false,
+      "somar_icms_na_base_ibs_cbs": false,
+      "somar_issqn_na_base_ibs_cbs": false,
+      "percentual_diferimento": 0.0,
+      "deduz_icms_da_base_de_pis_cofins": false
+    },
+    "args": [],
+    "kwargs": {}
+  },
+  "result": {
+    "base_calculo": 100.0,
+    "valor": 18.0,
+    "percentual_icms": 18.0,
+    "percentual_reducao": 0.0,
+    "percentual_icms_st": 0.0,
+    "percentual_mva": 0.0,
+    "base_calculo_st": null,
+    "valor_icms_st": null,
+    "percentual_reducao_st": 0.0,
+    "percentual_diferimento": 0.0,
+    "valor_icms_diferido": null,
+    "valor_icms_operacao": null,
+    "valor_bc_st_retido": 100.0,
+    "base_calculo_icms_efetivo": null,
+    "valor_icms_efetivo": null,
+    "modalidade_determinacao_bc_icms": "ValorOperacao",
+    "modalidade_determinacao_bc_icms_st": null
+  },
+  "audit_trail": {
+    "traces": [
+      {
+        "table_title": "Full ICMS Calculation Rules",
+        "facts": {
+          "valor_produto": 100.0,
+          "quantidade_produto": 1.0,
+          "frete": 0.0,
+          "seguro": 0.0,
+          "outras_despesas": 0.0,
+          "valor_ipi": 0.0,
+          "is_ativo": false,
+          "tipo_desconto": "Incondicional",
+          "desconto": 0.0,
+          "percentual_reducao": 0.0,
+          "percentual_icms": 18.0
+        },
+        "matched_rules": [
+          3
+        ],
+        "rule_count": 4,
+        "final_result": [
+          {
+            "base_calculo": 100.0,
+            "valor_final": 18.0
+          }
+        ],
+        "matched_rule_details": [
+          {
+            "rule_number": 4,
+            "input_conditions": {
+              "is_ativo": "false",
+              "tipo_desconto": "\"Incondicional\""
+            },
+            "output_calculations": {
+              "base_calculo": {
+                "expression": "( ( ( ( (valor_produto * quantidade_produto) + frete) + seguro) + outras_despesas) - desconto ) * (decimal(1) - (percentual_reducao / decimal(100)))",
+                "evaluated": "( ( ( ( (100.00 * 1) + 0) + 0) + 0) - 0 ) * (decimal(1) - (0 / decimal(100)))",
+                "result": 100.0
+              },
+              "valor_final": {
+                "expression": "( ( ( ( ( ( (valor_produto * quantidade_produto) + frete) + seguro) + outras_despesas) - desconto ) * (decimal(1) - (percentual_reducao / decimal(100))) ) * percentual_icms) / decimal(100)",
+                "evaluated": "( ( ( ( ( ( (100.00 * 1) + 0) + 0) + 0) - 0 ) * (decimal(1) - (0 / decimal(100))) ) * 18.0) / decimal(100)",
+                "result": 18.0
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
 ```
 
 Notes:
