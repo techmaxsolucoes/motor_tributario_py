@@ -4,6 +4,11 @@ A lightweight, Python-native tax calculation library for Brazilian fiscal rules 
 
 This repository provides calculators and a facade to reproduce common fiscal calculation flows used by Brazilian electronic invoices (NF-e, NFC-e, CT-e) and related documents.
 
+> [!NOTE]
+> motor_tributario_py is part of the SPEDIR project — the Brazilian Localization for ERPNext. See the documentation and related resources at https://github.com/techmaxsolucoes/SPEDIR-DOCS
+
+
+
 ## Features
 
 - Calculators for ICMS, ICMS ST, IPI, PIS, COFINS, FCP, DIFAL, IBPT and CBS/IBS flows
