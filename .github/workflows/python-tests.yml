@@ -46,4 +46,6 @@ jobs:
 
       - name: Run tests
         run: |
+          echo "$(pwd)"
+          echo "$(ls -alt)"
           pytest -q motor_tributario_py
