@@ -42,22 +42,32 @@ CST_51_DIFERIMENTO_RULE = {
             {"id": "percentual_diferimento"}  # Should be > 0
         ],
         "rows": [
-            ['> 0']
+            ['percentual_diferimento > decimal(0)'],
+            ['percentual_diferimento <= decimal(0)']  # Guard case
         ]
     },
     "outputs": {
         "cols": [
+            {"id": "should_calculate", "type": "boolean"},
             {"id": "valor_icms_operacao"},
             {"id": "valor_icms_diferido"},
             {"id": "valor_final"}
         ],
         "rows": [
             # Calculate operation value, deferred value, and final ICMS
-            # Note: ROUND_UP is handled in Python code for valor_icms_diferido
+            # valor_icms_diferido will need ROUND_UP quantization in Python
             [
+                'true',
                 '(base_calculo * percentual_icms) / decimal(100)',
-                '(valor_icms_operacao * percentual_diferimento) / decimal(100)',
-                'valor_icms_operacao - valor_icms_diferido'
+                '(((base_calculo * percentual_icms) / decimal(100)) * percentual_diferimento) / decimal(100)',
+                '((base_calculo * percentual_icms) / decimal(100)) - ((((base_calculo * percentual_icms) / decimal(100)) * percentual_diferimento) / decimal(100))'
+            ],
+            # No diferimento percentage - return base ICMS value
+            [
+                'false',
+                'decimal(0)',
+                'decimal(0)',
+                'decimal(0)'
             ]
         ]
     }
