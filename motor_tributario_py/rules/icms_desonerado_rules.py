@@ -1,5 +1,44 @@
 from decimal import Decimal
 
+# ICMS Desonerado Preprocessing Rule
+# Determines which CST group applies (assumes tipo_calculo is not null)
+ICMS_DESONERADO_PREPROCESSING_RULE = {
+    "title": "ICMS Desonerado Preprocessing",
+    "hit_policy": "First",
+    "inputs": {
+        "cols": [
+            {"id": "tipo_calculo"},  # "BaseSimples"/"BasePorDentro"
+            {"id": "cst"}            # "20"/"30"/"40"/"70"/other
+        ],
+        "rows": [
+            # BaseSimples - no CST grouping needed
+            ['"BaseSimples"', ''],
+            # BasePorDentro with CST 20 or 70
+            ['"BasePorDentro"', '"20"'],
+            ['"BasePorDentro"', '"70"'],
+            # BasePorDentro with CST 30 or 40
+            ['"BasePorDentro"', '"30"'],
+            ['"BasePorDentro"', '"40"'],
+            # Other cases
+            ['', '']
+        ]
+    },
+    "outputs": {
+        "cols": [
+            {"id": "should_calculate", "type": "boolean"},
+            {"id": "cst_group", "type": "string"}
+        ],
+        "rows": [
+            ['true', '"-"'],         # BaseSimples -> no grouping
+            ['true', '"GroupA"'],    # CST 20
+            ['true', '"GroupA"'],    # CST 70
+            ['true', '"GroupB"'],    # CST 30
+            ['true', '"GroupB"'],    # CST 40
+            ['true', '"-"']          # Default fallback
+        ]
+    }
+}
+
 # ICMS Desonerado Rule
 # Inputs:
 # - base_calculo (Calculated externally via ICMS Base Rule)

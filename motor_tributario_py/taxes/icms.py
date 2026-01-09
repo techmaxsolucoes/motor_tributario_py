@@ -65,7 +65,6 @@ class CalculadoraIcms:
         base_calculo = Decimal(str(results[0]["base_calculo"]))
         valor = Decimal(str(results[0]["valor_final"]))
         
-        
         # CST-specific post-processing using DMN rules
         valor_icms_operacao = None
         valor_icms_diferido = None
@@ -73,7 +72,10 @@ class CalculadoraIcms:
         valor_icms_efetivo = None
         
         if self.tributavel.cst:
-            from motor_tributario_py.rules.cst_post_processing_rules import CST_POST_PROCESSING_RULE
+            from motor_tributario_py.rules.cst_post_processing_rules import (
+                CST_POST_PROCESSING_RULE,
+                CST_51_DIFERIMENTO_RULE
+            )
             
             facts = {"cst": str(self.tributavel.cst)}
             post_decision = decide_single_table(CST_POST_PROCESSING_RULE, facts, strict_mode=False)
@@ -82,18 +84,30 @@ class CalculadoraIcms:
                 calcular_diferimento = post_decision[0].get("calcular_diferimento")
                 calcular_efetivo = post_decision[0].get("calcular_efetivo")
                 
-                # CST 51 - Diferimento (Deferral)
-                if (calcular_diferimento == 'true' or calcular_diferimento is True) and self.tributavel.percentual_diferimento > 0:
-                    from decimal import ROUND_UP
-                    # Calculate full operation value
-                    valor_icms_operacao = (base_calculo * self.tributavel.percentual_icms / Decimal('100')).quantize(Decimal('0.01'))
-                    # Calculate deferred amount - use ROUND_UP to match C# MidpointRounding.AwayFromZero
-                    valor_icms_diferido = (valor_icms_operacao * self.tributavel.percentual_diferimento / Decimal('100')).quantize(Decimal('0.01'), rounding=ROUND_UP)
-                    # Final ICMS = Operation - Deferred
-                    valor = valor_icms_operacao - valor_icms_diferido
+                # CST 51 - Diferimento (Deferral) - Use DMN rule
+                if calcular_diferimento:
+                    diferimento_facts = {
+                        "base_calculo": base_calculo,
+                        "percentual_icms": self.tributavel.percentual_icms,
+                        "percentual_diferimento": self.tributavel.percentual_diferimento
+                    }
+                    diferimento_result = decide_single_table(
+                        CST_51_DIFERIMENTO_RULE,
+                        diferimento_facts,
+                        strict_mode=True
+                    )
+                    
+                    if diferimento_result and diferimento_result[0]["should_calculate"]:
+                        from decimal import ROUND_UP
+                        # Get operation and deferred values from DMN
+                        valor_icms_operacao = Decimal(str(diferimento_result[0]["valor_icms_operacao"])).quantize(Decimal('0.01'))
+                        # Apply ROUND_UP to diferido to match C# MidpointRounding.AwayFromZero
+                        valor_icms_diferido = Decimal(str(diferimento_result[0]["valor_icms_diferido"])).quantize(Decimal('0.01'), rounding=ROUND_UP)
+                        # Recalculate final value with rounded diferido
+                        valor = valor_icms_operacao - valor_icms_diferido
                 
-                # CST 60 - Efetivo
-                if (calcular_efetivo == 'true' or calcular_efetivo is True) and self.tributavel.percentual_icms_efetivo > 0:
+                # CST 60 - Efetivo - Delegate to calculator
+                if calcular_efetivo and self.tributavel.percentual_icms_efetivo > 0:
                     from motor_tributario_py.taxes.icms_efetivo import CalculadoraIcmsEfetivo
                     calc_efetivo = CalculadoraIcmsEfetivo(self.tributavel)
                     res_efetivo = calc_efetivo.calcula()

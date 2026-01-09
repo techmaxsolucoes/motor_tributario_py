@@ -100,35 +100,37 @@ class CalculadoraCsosn:
         res.valor_icms = icms_res.valor
 
     def _calc_credito(self, res: ResultadoCalculoCsosn):
-        # Credito uses a base similar to ICMS
-        # Logic matches C#: Remove reduction, calc base?, apply credit rate.
-        # But wait, does Credito have its own base rule? Yes.
-        # However, `CalculadoraCreditoIcms.calcula` requires `base_calculo` input.
-        # So we must calculate the base first.
-        # C# behavior: `CalculaIcmsCredito` uses `CalculaBaseCalculoIcms`?
-        # Yes looking at `Csosn101.cs`, it calls `CalculaIcmsCredito`.
-        # Which likely orchestrates base calculation.
+        # Use DMN to determine credito calculation strategy
+        from motor_tributario_py.rules.credito_icms_rules import CREDITO_ICMS_PREPROCESSING_RULE
         
-        # We will assume Credito Base = ICMS Base (Proprio) but with Reduction=0 (handled below)
+        preprocessing_facts = {"dummy": 1}
+        preprocessing_result = decide_single_table(
+            CREDITO_ICMS_PREPROCESSING_RULE,
+            preprocessing_facts,
+            strict_mode=True
+        )
         
+        # DMN tells us to override percentual_reducao for credito base calculation
         original_reduction = self.tributavel.percentual_reducao
-        self.tributavel.percentual_reducao = Decimal(0)
+        percentual_reducao_override = Decimal(str(preprocessing_result[0]["percentual_reducao_override"]))
         
-        # Calculate Base using standard ICMS calculator
+        # Temporarily apply DMN-specified override
+        self.tributavel.percentual_reducao = percentual_reducao_override
+        
+        # Calculate base using standard ICMS calculator with DMN-modified reduction
         calc_icms_base = CalculadoraIcms(self.tributavel)
         res_icms_base = calc_icms_base.calcula()
-        
         base_for_credito = res_icms_base.base_calculo
         
-        # Now Calc Credit Value
+        # Restore original value
+        self.tributavel.percentual_reducao = original_reduction
+        
+        # Calculate credito value
         calc_cred = CalculadoraCreditoIcms(self.tributavel)
         res_cred = calc_cred.calcula(base_calculo=base_for_credito)
         
         res.valor_credito = res_cred.valor
         res.percentual_credito = self.tributavel.percentual_credito
-        
-        # Restore
-        self.tributavel.percentual_reducao = original_reduction
 
     def _calc_st_logic(self, res: ResultadoCalculoCsosn):
         res.percentual_mva = self.tributavel.percentual_mva
