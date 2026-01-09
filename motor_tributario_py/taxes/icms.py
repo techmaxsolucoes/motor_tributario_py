@@ -1,5 +1,5 @@
 from decimal import Decimal
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Dict, Any, Optional
 from motor_tributario_py.models import Tributavel
 from motor_tributario_py.rules.icms_rules import ICMS_CALC_RULE
@@ -26,6 +26,9 @@ class ResultadoCalculoIcms:
     # CST 60 - Efetivo
     base_calculo_icms_efetivo: Optional[Decimal] = None
     valor_icms_efetivo: Optional[Decimal] = None
+    # CST 90 - Crédito ICMS (populated by facade orchestration)
+    percentual_credito: Decimal = field(default=Decimal('0'))
+    valor_credito: Decimal = field(default=Decimal('0'))
     # CST 70/90 - Modalidade
     modalidade_determinacao_bc_icms: Optional[str] = None
     modalidade_determinacao_bc_icms_st: Optional[str] = None
