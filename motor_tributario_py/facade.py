@@ -1,5 +1,6 @@
 from decimal import Decimal
 from dataclasses import dataclass
+from typing import Optional
 from motor_tributario_py.models import Tributavel
 from motor_tributario_py.audit import AuditManager, ExecutionReport
 from motor_tributario_py.taxes.icms import CalculadoraIcms, ResultadoCalculoIcms
@@ -97,10 +98,10 @@ class FacadeCalculadoraTributacao:
         icms_res = self.calcula_icms()
         return CalculadoraFcp(self.tributavel).calcula(base_calculo_icms=icms_res.base_calculo)
 
-    def calcula_credito_icms(self) -> ResultadoCalculoCreditoIcms:
+    def calcula_credito_icms(self, icms_base_calculo: Optional[Decimal] = None) -> ResultadoCalculoCreditoIcms:
         # Logic from C#: Switch on Documento
         # CTe -> ValorIcmsSt is the base
-        # Others -> BaseCalculoIcms is the base
+        # Others -> BaseCalculoIcms is the base (passed as parameter to avoid recursion)
         base_to_use = Decimal('0')
         
         if self.tributavel.documento == "CTe":
@@ -109,9 +110,13 @@ class FacadeCalculadoraTributacao:
              st_res = self.calcula_icms_st()
              base_to_use = st_res.valor_icms_st
         else:
-             # Standard case
-             icms_res = self.calcula_icms()
-             base_to_use = icms_res.base_calculo
+             # Use the base provided (from calcula_icms orchestration) to avoid recursion
+             if icms_base_calculo is not None:
+                 base_to_use = icms_base_calculo
+             else:
+                 # Fallback: calculate ICMS if not provided (legacy behavior)
+                 icms_res = CalculadoraIcms(self.tributavel).calcula()
+                 base_to_use = icms_res.base_calculo
              
         return CalculadoraCreditoIcms(self.tributavel).calcula(base_calculo=base_to_use)
 
@@ -121,13 +126,16 @@ class FacadeCalculadoraTributacao:
         
         result = CalculadoraIcms(self.tributavel).calcula()
         
-        # Use DMN rules to determine if ST calculation is needed
+        # Use DMN rules to determine additional calculations needed
         if self.tributavel.cst:
             facts = {"cst": str(self.tributavel.cst)}
             decision = decide_single_table(CST_DISPATCH_RULE, facts, strict_mode=False)
             
             if decision:
-                calcular_st = decision[0].get("calcular_icms_st")
+                d = decision[0]
+                
+                # Check if ST calculation is needed
+                calcular_st = d.get("calcular_icms_st")
                 needs_st = calcular_st == 'true' or calcular_st is True
                 
                 if needs_st and self.tributavel.percentual_icms_st and self.tributavel.percentual_mva:
@@ -135,6 +143,16 @@ class FacadeCalculadoraTributacao:
                     st_result = self.calcula_icms_st()
                     result.base_calculo_st = st_result.base_calculo_icms_st
                     result.valor_icms_st = st_result.valor_icms_st
+                
+                # Check if Credito calculation is needed (CST 90)
+                calcular_credito = d.get("calcular_credito")
+                needs_credito = calcular_credito == 'true' or calcular_credito is True
+                
+                if needs_credito and self.tributavel.percentual_credito:
+                    # Calculate credito passing the ICMS base to avoid recursion
+                    credito_result = self.calcula_credito_icms(icms_base_calculo=result.base_calculo)
+                    result.percentual_credito = self.tributavel.percentual_credito
+                    result.valor_credito = credito_result.valor
         
         return result
 
@@ -244,6 +262,12 @@ class ResultadoTributacao:
     def valor_bc_icms(self): return self.res_icms.base_calculo
     @property
     def valor_icms(self): return self.res_icms.valor
+    
+    # Crédito ICMS (from ICMS orchestration for CST 90)
+    @property
+    def valor_credito(self): return self.res_icms.valor_credito or Decimal('0')
+    @property
+    def percentual_credito(self): return self.res_icms.percentual_credito or Decimal('0')
     
     @property
     def valor_ipi(self): return self.res_ipi.valor

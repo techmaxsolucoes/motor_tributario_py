@@ -26,31 +26,33 @@ CST_DISPATCH_RULE = {
         "cols": [
             {"id": "calcular_icms", "type": "boolean"},
             {"id": "calcular_icms_st", "type": "boolean"},
+            {"id": "calcular_credito", "type": "boolean"},
+            {"id": "calcular_fcp", "type": "boolean"},
             {"id": "modo_calculo", "type": "string"}
         ],
         "rows": [
             # 00: ICMS only
-            ['true', 'false', '"ICMS Only"'],
+            ['true', 'false', 'false', 'false', '"ICMS Only"'],
             # 10: ICMS + ST
-            ['true', 'true', '"ICMS + ST"'],
+            ['true', 'true', 'false', 'false', '"ICMS + ST"'],
             # 20: ICMS with reduction
-            ['true', 'false', '"ICMS with Reduction"'],
+            ['true', 'false', 'false', 'false', '"ICMS with Reduction"'],
             # 30: ST only (no ICMS proprio)
-            ['false', 'true', '"ST Only"'],
+            ['false', 'true', 'false', 'false', '"ST Only"'],
             # 40: Exempt
-            ['false', 'false', '"Exempt"'],
+            ['false', 'false', 'false', 'false', '"Exempt"'],
             # 41: Not taxed
-            ['false', 'false', '"Not Taxed"'],
+            ['false', 'false', 'false', 'false', '"Not Taxed"'],
             # 50: Suspension
-            ['false', 'false', '"Suspension"'],
+            ['false', 'false', 'false', 'false', '"Suspension"'],
             # 51: Deferral
-            ['true', 'false', '"Deferral"'],
+            ['true', 'false', 'false', 'false', '"Deferral"'],
             # 60: ST already collected
-            ['false', 'false', '"ST Already Collected"'],
+            ['false', 'false', 'false', 'false', '"ST Already Collected"'],
             # 70: ICMS with reduction + ST
-            ['true', 'true', '"ICMS with Reduction + ST"'],
-            # 90: Other
-            ['true', 'true', '"Other"'],
+            ['true', 'true', 'false', 'false', '"ICMS with Reduction + ST"'],
+            # 90: Other (ICMS + ST + Credito + FCP)
+            ['true', 'true', 'true', 'true', '"Other"'],
         ]
     }
 }

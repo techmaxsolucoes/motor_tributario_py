@@ -5097,5 +5097,296 @@
                 "expected": 100.0
             }
         ]
+    },
+    {
+        "group": "Cst90Integration",
+        "testcase": "Cst90_OrchestrationWithCredito_SimpleCase",
+        "inputs": {
+            "Cst": "90",
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualIcms": 18.0,
+            "PercentualCredito": 7.5,
+            "Documento": "NFe"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorBcIcms",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorIcms",
+                "expected": 180.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "PercentualCredito",
+                "expected": 7.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorCredito",
+                "expected": 75.0
+            }
+        ]
+    },
+    {
+        "group": "Cst90Integration",
+        "testcase": "Cst90_OrchestrationWithICMSStAndCredito",
+        "inputs": {
+            "Cst": "90",
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualIcms": 18.0,
+            "PercentualIcmsSt": 18.0,
+            "PercentualMva": 40.0,
+            "PercentualCredito": 7.5,
+            "Documento": "NFe"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorBcIcms",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorIcms",
+                "expected": 180.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorBcIcmsSt",
+                "expected": 1400.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorIcmsSt",
+                "expected": 72.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "PercentualCredito",
+                "expected": 7.5
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorCredito",
+                "expected": 75.0
+            }
+        ]
+    },
+    {
+        "group": "Cst90Integration",
+        "testcase": "Cst90_OrchestrationWithReducao",
+        "inputs": {
+            "Cst": "90",
+            "ValorProduto": 2000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualIcms": 18.0,
+            "PercentualReducao": 10.0,
+            "PercentualCredito": 12.0,
+            "Documento": "NFe"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorBcIcms",
+                "expected": 1800.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorIcms",
+                "expected": 324.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "PercentualCredito",
+                "expected": 12.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorCredito",
+                "expected": 216.0
+            }
+        ]
+    },
+    {
+        "group": "Cst90Integration",
+        "testcase": "Cst90_OrchestrationWithFrete",
+        "inputs": {
+            "Cst": "90",
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "Frete": 100.0,
+            "PercentualIcms": 18.0,
+            "PercentualCredito": 10.0,
+            "Documento": "NFe"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorBcIcms",
+                "expected": 1100.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorIcms",
+                "expected": 198.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "PercentualCredito",
+                "expected": 10.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorCredito",
+                "expected": 110.0
+            }
+        ]
+    },
+    {
+        "group": "Cst90Integration",
+        "testcase": "Cst90_NoCredito_WhenPercentualCreditoNotSet",
+        "inputs": {
+            "Cst": "90",
+            "ValorProduto": 1000.0,
+            "QuantidadeProduto": 1.0,
+            "PercentualIcms": 18.0,
+            "Documento": "NFe"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_icms",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorBcIcms",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorIcms",
+                "expected": 180.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "PercentualCredito",
+                "expected": 0.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorCredito",
+                "expected": 0.0
+            }
+        ]
+    },
+    {
+        "group": "Cst90Integration",
+        "testcase": "Cst90_ResultadoTributacao_ExposesCredito",
+        "inputs": {
+            "Cst": "90",
+            "ValorProduto": 500.0,
+            "QuantidadeProduto": 2.0,
+            "PercentualIcms": 12.0,
+            "PercentualCredito": 5.0,
+            "Documento": "NFe"
+        },
+        "facade_args": {},
+        "executions": [
+            {
+                "var_name": "resultado",
+                "method": "calcula_tributacao",
+                "args": []
+            }
+        ],
+        "asserts": [
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorBcIcms",
+                "expected": 1000.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorIcms",
+                "expected": 120.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "PercentualCredito",
+                "expected": 5.0
+            },
+            {
+                "type": "Equal",
+                "target_var": "resultado",
+                "prop": "ValorCredito",
+                "expected": 50.0
+            }
+        ]
     }
 ]
