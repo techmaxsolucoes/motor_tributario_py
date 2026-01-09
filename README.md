@@ -49,23 +49,194 @@ flowchart LR
 - `rules/` contains DMN-style rule definitions consulted via `bkflow-dmn`.
 - `taxes/` implements numeric calculations; `audit.py` captures evaluation traces and produces both human-readable and JSON reports.
 - `scripts/` contains utilities used to generate embedded documentation and debug examples.
+
+## Tributavel Data Model
+
+The `Tributavel` dataclass is the central data structure that holds all information needed for tax calculations. All fields have sensible defaults and use `Decimal` for monetary values.
+
+### Basic Values
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `valor_produto` | Decimal | 0 | Unit price of the product |
+| `quantidade_produto` | Decimal | 1 | Quantity |
+| `frete` | Decimal | 0 | Freight/shipping cost |
+| `seguro` | Decimal | 0 | Insurance cost |
+| `outras_despesas` | Decimal | 0 | Other expenses |
+| `desconto` | Decimal | 0 | Discount amount |
+| `valor_ipi` | Decimal | 0 | IPI value (can be calculated or provided) |
+
+### Flags & Configuration
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `is_servico` | bool | False | Whether this is a service (affects ISSQN) |
+| `is_ativo_imobilizado_ou_uso_consumo` | bool | False | Fixed asset or for consumption (affects IPI in base) |
+| `tipo_desconto` | str | "Incondicional" | "Condicional" or "Incondicional" |
+| `cst` | str | "" | CST code (e.g., "00", "20", "51", "60") |
+| `csosn` | int | 0 | CSOSN code for Simples Nacional (e.g., 101, 500, 900) |
+| `tipo_calculo_icms_desonerado` | str | "" | "BaseSimples" or "BasePorDentro" |
+| `crt` | str | "" | Regime: "RegimeNormal", "SimplesNacional" |
+| `tipo_operacao` | str | "" | "OperacaoInterna", "OperacaoInterestadual" |
+| `tipo_pessoa` | str | "" | "Fisica", "Juridica" |
+| `documento` | str | "" | Document type: "NFe", "CTe", "MFe" |
+
+### ICMS (Regular)
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `percentual_icms` | Decimal | 0 | ICMS rate (%) |
+| `percentual_reducao` | Decimal | 0 | ICMS base reduction (%) |
+| `percentual_diferimento` | Decimal | 0 | Deferral percentage for CST 51 (%) |
+
+### ICMS ST (Substituição Tributária)
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `percentual_icms_st` | Decimal | 0 | ICMS ST rate (%) |
+| `percentual_mva` | Decimal | 0 | MVA - Added Value Margin (%) |
+| `percentual_reducao_st` | Decimal | 0 | ST base reduction (%) |
+
+### ICMS Efetivo (CST 60)
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `percentual_icms_efetivo` | Decimal | 0 | Effective ICMS rate (%) |
+| `percentual_reducao_icms_efetivo` | Decimal | 0 | Effective ICMS base reduction (%) |
+
+### ICMS Monofásico (Single-phase)
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `quantidade_base_calculo_icms_monofasico` | Decimal | 0 | Quantity for monophasic base |
+| `aliquota_ad_rem_icms` | Decimal | 0 | Ad rem rate |
+| `percentual_reducao_aliquota_ad_rem_icms` | Decimal | 0 | Ad rem rate reduction (%) |
+| `percentual_biodiesel` | Decimal | 0 | Biodiesel percentage (%) |
+| `percentual_originario_uf` | Decimal | 0 | Percentage originating from state (%) |
+| `quantidade_base_calculo_icms_monofasico_retido_anteriormente` | Decimal | 0 | Previously withheld quantity |
+| `aliquota_ad_rem_icms_retido_anteriormente` | Decimal | 0 | Previously withheld ad rem rate |
+
+### FCP (Fundo de Combate à Pobreza)
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `percentual_fcp` | Decimal | 0 | FCP rate (%) |
+| `percentual_fcp_st` | Decimal | 0 | FCP ST rate (%) |
+| `percentual_fcp_st_retido` | Decimal | 0 | Withheld FCP ST rate (%) |
+| `valor_ultima_base_calculo_icms_st_retido` | Decimal | 0 | Last ST base value withheld |
+
+### ICMS Crédito (Simples Nacional)
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `percentual_credito` | Decimal | 0 | ICMS credit rate (%) |
+
+### DIFAL (Diferencial de Alíquota)
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `percentual_difal_interna` | Decimal | 0 | Internal (destination) rate (%) |
+| `percentual_difal_interestadual` | Decimal | 0 | Interstate (origin) rate (%) |
+
+### IPI (Industrialized Products Tax)
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `percentual_ipi` | Decimal | 0 | IPI rate (%) |
+
+### PIS
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `percentual_pis` | Decimal | 0 | PIS rate (%) |
+| `percentual_reducao_pis` | Decimal | 0 | PIS base reduction (%) |
+| `percentual_ret_pis` | Decimal | 0 | PIS withholding rate (%) |
+| `deduz_icms_da_base_de_pis_cofins` | bool | False | Whether to deduct ICMS from PIS/COFINS base |
+
+### COFINS
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `percentual_cofins` | Decimal | 0 | COFINS rate (%) |
+| `percentual_reducao_cofins` | Decimal | 0 | COFINS base reduction (%) |
+| `percentual_ret_cofins` | Decimal | 0 | COFINS withholding rate (%) |
+
+### ISSQN (Service Tax)
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `percentual_issqn` | Decimal | 0 | ISSQN rate (%) |
+| `percentual_ret_csll` | Decimal | 0 | CSLL withholding rate (%) |
+| `percentual_ret_irrf` | Decimal | 0 | IRRF withholding rate (%) |
+| `percentual_ret_inss` | Decimal | 0 | INSS withholding rate (%) |
+
+### IBPT (Tax Transparency)
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `percentual_federal` | Decimal | 0 | Federal tax burden (%) |
+| `percentual_estadual` | Decimal | 0 | State tax burden (%) |
+| `percentual_municipal` | Decimal | 0 | Municipal tax burden (%) |
+| `percentual_federal_importados` | Decimal | 0 | Federal tax burden for imports (%) |
+
+### IBS/CBS (Tax Reform - New System)
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `percentual_ibs_uf` | Decimal | 0 | IBS state rate (%) |
+| `percentual_ibs_municipal` | Decimal | 0 | IBS municipal rate (%) |
+| `percentual_cbs` | Decimal | 0 | CBS rate (%) |
+| `percentual_reducao_ibs_uf` | Decimal | 0 | IBS state reduction (%) |
+| `percentual_reducao_ibs_municipal` | Decimal | 0 | IBS municipal reduction (%) |
+| `percentual_reducao_cbs` | Decimal | 0 | CBS reduction (%) |
+| `somar_pis_na_base_ibs_cbs` | bool | False | Include PIS in IBS/CBS base |
+| `somar_cofins_na_base_ibs_cbs` | bool | False | Include COFINS in IBS/CBS base |
+| `somar_icms_na_base_ibs_cbs` | bool | False | Include ICMS in IBS/CBS base |
+| `somar_issqn_na_base_ibs_cbs` | bool | False | Include ISSQN in IBS/CBS base |
+
+### Usage Example
+
+```python
+from decimal import Decimal
+from motor_tributario_py.models import Tributavel
+
+# Simple product with ICMS
+produto = Tributavel(
+    valor_produto=Decimal('100.00'),
+    quantidade_produto=Decimal('2'),
+    percentual_icms=Decimal('18'),
+)
+
+# Product with freight, insurance and discount
+produto_completo = Tributavel(
+    valor_produto=Decimal('500.00'),
+    frete=Decimal('50.00'),
+    seguro=Decimal('10.00'),
+    desconto=Decimal('25.00'),
+    tipo_desconto="Incondicional",
+    percentual_icms=Decimal('12'),
+    percentual_ipi=Decimal('5'),
+    percentual_pis=Decimal('1.65'),
+    percentual_cofins=Decimal('7.6'),
+)
+```
+
+
+## Quick Example
+
+```python
+from decimal import Decimal
+from motor_tributario_py.models import Tributavel
+from motor_tributario_py.facade import FacadeCalculadoraTributacao
+
+# Create a Tributavel instance with product data
+produto = Tributavel(
+    valor_produto=Decimal('100.00'),
+    quantidade_produto=Decimal('1'),
     percentual_icms=Decimal('18.0'),
     percentual_pis=Decimal('1.65'),
     percentual_cofins=Decimal('7.6'),
 )
 
-```python
+# Use the facade to calculate taxes
 facade = FacadeCalculadoraTributacao(produto)
+
+# Calculate ICMS
 res_icms = facade.calcula_icms()
-print('ICMS Base:', res_icms.base_calculo)
-print('ICMS Valor:', res_icms.valor)
+print('ICMS Base:', res_icms.base_calculo)  # 100.00
+print('ICMS Valor:', res_icms.valor)        # 18.00
 
-# Composite result with many taxes
+# Calculate all taxes at once
 resultado = facade.calcula_tributacao()
-print('Valor PIS:', resultado.valor_pis)
-print('Valor COFINS:', resultado.valor_cofins)
+print('Valor PIS:', resultado.valor_pis)       # 1.65
+print('Valor COFINS:', resultado.valor_cofins) # 7.60
 
-# Audit/debug example
+# Debug execution with detailed trace
 report = facade.debug_execution('calcula_icms')
 print(report.format_pretty())
 ```
