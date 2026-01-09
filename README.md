@@ -516,9 +516,19 @@ Please refer to the repository LICENSE file for licensing information.
 
 ## Embedded rule sources
 ### credito_icms_rules.py
-**Summary:** Credito ICMS Calculation
+**Summary:** Credito ICMS Preprocessing; Credito ICMS Calculation
 
 Source file: /home/maxwell/Rule/motor_tributario_py/motor_tributario_py/rules/credito_icms_rules.py
+
+
+**Rule:** Credito ICMS Preprocessing
+**Hit policy:** Unique
+
+|Input: dummy|Output: percentual_reducao_override|Output: calculation_strategy|
+|---|---|---|
+|1|0|"use_icms_base_without_reduction"|
+
+
 
 
 **Rule:** Credito ICMS Calculation
@@ -574,9 +584,10 @@ Source file: /home/maxwell/Rule/motor_tributario_py/motor_tributario_py/rules/cs
 **Rule:** CST 51 Diferimento Calculation
 **Hit policy:** Unique
 
-|Input: percentual_diferimento|Output: valor_icms_operacao|Output: valor_icms_diferido|Output: valor_final|
-|---|---|---|---|
-|> 0|(base_calculo * percentual_icms) / decimal(100)|(valor_icms_operacao * percentual_diferimento) / decimal(100)|valor_icms_operacao - valor_icms_diferido|
+|Input: percentual_diferimento|Output: should_calculate|Output: valor_icms_operacao|Output: valor_icms_diferido|Output: valor_final|
+|---|---|---|---|---|
+|percentual_diferimento > decimal(0)|true|(base_calculo * percentual_icms) / decimal(100)|(((base_calculo * percentual_icms) / decimal(100)) * percentual_diferimento) / decimal(100)|((base_calculo * percentual_icms) / decimal(100)) - ((((base_calculo * percentual_icms) / decimal(100)) * percentual_diferimento) / decimal(100))|
+|percentual_diferimento <= decimal(0)|false|decimal(0)|decimal(0)|decimal(0)|
 
 
 
@@ -589,19 +600,19 @@ Source file: /home/maxwell/Rule/motor_tributario_py/motor_tributario_py/rules/cs
 **Rule:** CST Dispatch Rules
 **Hit policy:** Unique
 
-|Input: cst|Output: calcular_icms|Output: calcular_icms_st|Output: modo_calculo|
-|---|---|---|---|
-|"00"|true|false|"ICMS Only"|
-|"10"|true|true|"ICMS + ST"|
-|"20"|true|false|"ICMS with Reduction"|
-|"30"|false|true|"ST Only"|
-|"40"|false|false|"Exempt"|
-|"41"|false|false|"Not Taxed"|
-|"50"|false|false|"Suspension"|
-|"51"|true|false|"Deferral"|
-|"60"|false|false|"ST Already Collected"|
-|"70"|true|true|"ICMS with Reduction + ST"|
-|"90"|true|true|"Other"|
+|Input: cst|Output: calcular_icms|Output: calcular_icms_st|Output: calcular_credito|Output: calcular_fcp|Output: modo_calculo|
+|---|---|---|---|---|---|
+|"00"|true|false|false|false|"ICMS Only"|
+|"10"|true|true|false|false|"ICMS + ST"|
+|"20"|true|false|false|false|"ICMS with Reduction"|
+|"30"|false|true|false|false|"ST Only"|
+|"40"|false|false|false|false|"Exempt"|
+|"41"|false|false|false|false|"Not Taxed"|
+|"50"|false|false|false|false|"Suspension"|
+|"51"|true|false|false|false|"Deferral"|
+|"60"|false|false|false|false|"ST Already Collected"|
+|"70"|true|true|false|false|"ICMS with Reduction + ST"|
+|"90"|true|true|true|true|"Other"|
 
 
 
@@ -725,9 +736,24 @@ Source file: /home/maxwell/Rule/motor_tributario_py/motor_tributario_py/rules/ib
 
 
 ### icms_desonerado_rules.py
-**Summary:** ICMS Desonerado Calculation Rules
+**Summary:** ICMS Desonerado Preprocessing; ICMS Desonerado Calculation Rules
 
 Source file: /home/maxwell/Rule/motor_tributario_py/motor_tributario_py/rules/icms_desonerado_rules.py
+
+
+**Rule:** ICMS Desonerado Preprocessing
+**Hit policy:** First
+
+|Input: tipo_calculo|Input: cst|Output: should_calculate|Output: cst_group|
+|---|---|---|---|
+|"BaseSimples"||true|"-"|
+|"BasePorDentro"|"20"|true|"GroupA"|
+|"BasePorDentro"|"70"|true|"GroupA"|
+|"BasePorDentro"|"30"|true|"GroupB"|
+|"BasePorDentro"|"40"|true|"GroupB"|
+|||true|"-"|
+
+
 
 
 **Rule:** ICMS Desonerado Calculation Rules
@@ -742,9 +768,21 @@ Source file: /home/maxwell/Rule/motor_tributario_py/motor_tributario_py/rules/ic
 
 
 ### icms_efetivo_rules.py
-**Summary:** ICMS Efetivo Base Calculation; ICMS Efetivo Calculation
+**Summary:** ICMS Efetivo Preprocessing; ICMS Efetivo Base Calculation; ICMS Efetivo Calculation
 
 Source file: /home/maxwell/Rule/motor_tributario_py/motor_tributario_py/rules/icms_efetivo_rules.py
+
+
+**Rule:** ICMS Efetivo Preprocessing
+**Hit policy:** Unique
+
+|Input: percentual_icms_efetivo|Input: is_ativo|Output: should_calculate|Output: ipi_adjustment|
+|---|---|---|---|
+|percentual_icms_efetivo = decimal(0)||false|"none"|
+|percentual_icms_efetivo > decimal(0)|true|true|"add_to_outras_despesas"|
+|percentual_icms_efetivo > decimal(0)|false|true|"none"|
+
+
 
 
 **Rule:** ICMS Efetivo Base Calculation
