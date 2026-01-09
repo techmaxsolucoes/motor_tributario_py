@@ -54,6 +54,7 @@ flowchart LR
     percentual_cofins=Decimal('7.6'),
 )
 
+```python
 facade = FacadeCalculadoraTributacao(produto)
 res_icms = facade.calcula_icms()
 print('ICMS Base:', res_icms.base_calculo)
